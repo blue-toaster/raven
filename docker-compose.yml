@@ -1,0 +1,25 @@
+version: '3.1'
+
+services:
+
+  bot:
+    tty: true
+    restart: always
+    build: .
+    container_name: raven
+    env_file:
+      - "../src/.env.development"
+      - "../src/.env.development.local"
+    networks:
+      - bot
+  postgres:
+    image: postgres:alpine
+    restart: always
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - bot
+
+networks:
+  bot:

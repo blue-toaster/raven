@@ -1,0 +1,15 @@
+datasource db {
+  url      = env("DATABASE_URL")
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model GuildSettings {
+  guildId String  @id @map("guild_id")
+  prefix  String? @db.Text
+
+  @@map("guild_settings")
+}

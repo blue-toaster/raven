@@ -8,7 +8,8 @@
     "build": "tsc -p src",
     "watch": "tsc --watch -p src",
     "start": "node .",
-    "dev": "run-p watch start"
+    "dev": "run-p watch start",
+    "prisma:gen": "prisma generate"
   },
   "devDependencies": {
     "@artiefuzzz/eslint-config": "1.2.0",
@@ -20,6 +21,7 @@
     "typescript": "4.5.4"
   },
   "dependencies": {
+    "@prisma/client": "^3.8.1",
     "@sapphire/decorators": "^4.0.0",
     "@sapphire/framework": "^2.3.0",
     "@sapphire/plugin-editable-commands": "^1.1.3",
@@ -32,6 +34,7 @@
     "colorette": "^2.0.16",
     "discord.js": "^13.6.0",
     "dotenv-cra": "^3.0.2",
+    "prisma": "^3.8.1",
     "reflect-metadata": "^0.1.13"
   },
   "imports": {
