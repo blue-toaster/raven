@@ -9,7 +9,9 @@
     "watch": "tsc --watch -p src",
     "start": "prisma migrate deploy; node ./build/main.js",
     "dev": "run-p watch start",
-    "prisma:gen": "prisma generate"
+    "prisma:gen": "prisma generate",
+    "migrate:start": "docker compose up -d postgres; prisma migrate dev --name raven",
+    "migrate": "prisma migrate dev --name raven"
   },
   "devDependencies": {
     "@artiefuzzz/eslint-config": "1.2.0",
