@@ -31,7 +31,7 @@ export class Prefix extends Command {
         guildId: message.guild!.id
       },
       data: {
-        prefix
+        prefix: prefix
       }
     })
 

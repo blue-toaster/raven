@@ -36,7 +36,6 @@ export default class Client extends SapphireClient {
 
     this.prisma = prisma
 
-
     await prisma.$connect()
 
     process.once('SIGINT', () => this.stop())
