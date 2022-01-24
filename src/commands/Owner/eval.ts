@@ -1,5 +1,6 @@
+import Command from '#lib/structures/Command'
 import { ApplyOptions } from '@sapphire/decorators'
-import { Args, Command, CommandOptions } from '@sapphire/framework'
+import type { Args, CommandOptions } from '@sapphire/framework'
 import { send } from '@sapphire/plugin-editable-commands'
 import { Type } from '@sapphire/type'
 import { codeBlock, isThenable } from '@sapphire/utilities'
