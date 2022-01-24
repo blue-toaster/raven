@@ -12,6 +12,8 @@ services:
       - "src/.env.development.local"
     networks:
       - bot
+    depends_on:
+      - postgres
   postgres:
     image: postgres:alpine
     restart: always

@@ -7,7 +7,7 @@
     "lint:fix": "eslint --cache --report-unused-disable-directives --ext .ts src/ --fix",
     "build": "tsc -p src",
     "watch": "tsc --watch -p src",
-    "start": "node .",
+    "start": "prisma migrate deploy; node ./build/main.js",
     "dev": "run-p watch start",
     "prisma:gen": "prisma generate"
   },

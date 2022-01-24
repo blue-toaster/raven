@@ -7,7 +7,7 @@ import type { Message } from 'discord.js'
 @ApplyOptions<CommandOptions>({
   description: 'Returns bot latency'
 })
-export class UserCommand extends Command {
+export class Ping extends Command {
   public async messageRun(message: Message) {
     const msg = await send(message, 'Ping?')
     const ping = Math.round(this.container.client.ws.ping)

@@ -10,7 +10,7 @@ import type { Message } from 'discord.js'
   description: 'Set guild prefix',
   subCommands: ['set', 'reset', { input: 'show', default: true }]
 })
-export class UserCommand extends Command {
+export class Prefix extends Command {
   public async show(message: Message) {
     const settings = await this.container.client.prisma.guildSettings.findUnique({
       where: {

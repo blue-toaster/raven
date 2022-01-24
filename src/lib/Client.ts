@@ -1,5 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import { SapphireClient } from '@sapphire/framework'
+import type { Message } from 'discord.js'
+import { envParseString } from './env'
 import './setup'
 
 export default class Client extends SapphireClient {
@@ -39,5 +41,15 @@ export default class Client extends SapphireClient {
 
     process.once('SIGINT', () => this.stop())
     process.once('SIGTERM', () => this.stop())
+  }
+
+  public fetchPrefix = async (message: Message) => {
+    const guild = await this.prisma.guildSettings.findUnique({
+      where: {
+        guildId: message.guild!.id
+      }
+    })
+
+    return guild?.prefix ?? envParseString('PREFIX')
   }
 }
