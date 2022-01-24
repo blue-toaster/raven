@@ -8,8 +8,8 @@ services:
     build: .
     container_name: raven
     env_file:
-      - "../src/.env.development"
-      - "../src/.env.development.local"
+      - "src/.env.development"
+      - "src/.env.development.local"
     networks:
       - bot
   postgres:
