@@ -1,0 +1,18 @@
+{
+  "extends": "@artiefuzzz/ts",
+  "compilerOptions": {
+    "target": "ESNext",
+    "outDir": "../build",
+    "importsNotUsedAsValues": "error",
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {
+      "#lib/*": ["./lib/*"],
+      "#lib/env": ["./lib/env/parser.ts"]
+    },
+    "importHelpers": true
+  },
+  "include": ["."],
+  "exclude": ["tsconfig.json"]
+}
