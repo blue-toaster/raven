@@ -2,9 +2,9 @@ import { envParseArray } from '#lib/env'
 import Command from '#lib/structures/Command'
 import { ApplyOptions } from '@sapphire/decorators'
 import { PaginatedMessage } from '@sapphire/discord.js-utilities'
-import type { CommandOptions } from '@sapphire/framework'
-// import { send } from '@sapphire/plugin-editable-commands'
-import { Message, MessageEmbed, Snowflake } from 'discord.js'
+import type { Args, CommandOptions } from '@sapphire/framework'
+import { send } from '@sapphire/plugin-editable-commands'
+import { EmbedField, Message, MessageEmbed, Snowflake } from 'discord.js'
 
 @ApplyOptions<CommandOptions>({
   description: 'Shows the available commands.',
@@ -12,8 +12,38 @@ import { Message, MessageEmbed, Snowflake } from 'discord.js'
   preconditions: ['GuildTextOnly']
 })
 export class Help extends Command {
-  public async messageRun(message: Message) {
+  public async messageRun(message: Message, args: Args) {
+    const command = await args.pickResult('string')
+    if (command.success) return await this.commandHelp(message, command.value)
     return await this.helpMenu(message)
+  }
+
+  private async commandHelp(message: Message, commandName: string) {
+    const command = this.container.stores.get('commands').get(commandName.toLowerCase())
+
+    if (typeof command === 'undefined') {
+      return await send(message, 'That command does not exit.')
+    }
+
+    let fields: EmbedField[] = []
+
+    if (command.description) {
+      fields.push({ name: 'Description 🗒️', value: command.description, inline: false })
+    }
+
+    if (command.detailedDescription) {
+      fields.push({ name: 'Detailed Description 📝', value: command.detailedDescription, inline: false })
+    }
+
+    if (command.aliases) {
+      fields.push({ name: 'Aliases ➕', value: command.aliases.map(a => `\`${a}\``).join(', '), inline: false })
+    }
+
+    const embed = new MessageEmbed()
+      .setTitle(`Help Page | ${command.name}`)
+      .addFields(fields)
+
+    return await send(message, { embeds: [embed] })
   }
 
   private async helpMenu(message: Message) {
