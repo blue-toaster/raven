@@ -24,6 +24,7 @@
     "typescript": "4.5.4"
   },
   "dependencies": {
+    "@artiefuzzz/lynx": "^2.2.5",
     "@prisma/client": "^3.8.1",
     "@sapphire/decorators": "^4.0.0",
     "@sapphire/discord.js-utilities": "^4.4.0",
@@ -43,6 +44,7 @@
   },
   "imports": {
     "#lib/*": "./build/lib/*.js",
-    "#lib/env": "./build/lib/env/index.js"
+    "#lib/env": "./build/lib/env/index.js",
+    "#types": "./build/lib/@types/index.js"
   }
 }

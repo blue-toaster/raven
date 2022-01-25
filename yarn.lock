@@ -17,10 +17,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@artiefuzzz/lynx@npm:^2.2.5":
+  version: 2.2.5
+  resolution: "@artiefuzzz/lynx@npm:2.2.5"
+  dependencies:
+    "@artiefuzzz/utils": ^1.0.3
+    undici: ^4.11.3
+  checksum: 2e90c7299878d5382c736c0c98560b2b116fb0480ec6e7701fafee3fd0b362a8d7d623cee60e97b633105378b4ca9ff34fd63f5d11a168fa35b3ad577565d6ca
+  languageName: node
+  linkType: hard
+
 "@artiefuzzz/ts@npm:1.1.2":
   version: 1.1.2
   resolution: "@artiefuzzz/ts@npm:1.1.2"
   checksum: d29c668fb8c5cd78ea99e30e6f35fcba05d8c1fc6fce9106cfaac799fe052d79224329deacadb9efbfc910cff53f8ca3fcc85743f4d9f9b3931768ba41e7fa73
+  languageName: node
+  linkType: hard
+
+"@artiefuzzz/utils@npm:^1.0.3":
+  version: 1.2.3
+  resolution: "@artiefuzzz/utils@npm:1.2.3"
+  checksum: 018b732942d66365e98ae78e743aa468769e4d38337408a14e5b3a865206c2c044e9bd9b4e81982a1c753c4b2751c5b7b9e9c5486a4cc1e3c5d65e6604448fd1
   languageName: node
   linkType: hard
 
@@ -2463,6 +2480,37 @@ __metadata:
   languageName: node
   linkType: hard
 
+"raven@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "raven@workspace:."
+  dependencies:
+    "@artiefuzzz/eslint-config": 1.2.0
+    "@artiefuzzz/lynx": ^2.2.5
+    "@artiefuzzz/ts": 1.1.2
+    "@prisma/client": ^3.8.1
+    "@sapphire/decorators": ^4.0.0
+    "@sapphire/discord.js-utilities": ^4.4.0
+    "@sapphire/framework": ^2.3.0
+    "@sapphire/plugin-editable-commands": ^1.1.3
+    "@sapphire/plugin-hmr": ^1.1.0
+    "@sapphire/plugin-logger": ^2.1.2
+    "@sapphire/plugin-subcommands": ^2.1.3
+    "@sapphire/time-utilities": ^1.5.1
+    "@sapphire/type": ^2.1.2
+    "@sapphire/utilities": ^3.2.0
+    "@types/node": 17.0.9
+    colorette: ^2.0.16
+    discord.js: ^13.6.0
+    dotenv-cra: ^3.0.2
+    eslint: 8.7.0
+    npm-run-all: 4.1.5
+    prisma: ^3.8.1
+    reflect-metadata: ^0.1.13
+    tslib: 2.3.1
+    typescript: 4.5.4
+  languageName: unknown
+  linkType: soft
+
 "read-pkg@npm:^3.0.0":
   version: 3.0.0
   resolution: "read-pkg@npm:3.0.0"
@@ -2873,36 +2921,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"template@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "template@workspace:."
-  dependencies:
-    "@artiefuzzz/eslint-config": 1.2.0
-    "@artiefuzzz/ts": 1.1.2
-    "@prisma/client": ^3.8.1
-    "@sapphire/decorators": ^4.0.0
-    "@sapphire/discord.js-utilities": ^4.4.0
-    "@sapphire/framework": ^2.3.0
-    "@sapphire/plugin-editable-commands": ^1.1.3
-    "@sapphire/plugin-hmr": ^1.1.0
-    "@sapphire/plugin-logger": ^2.1.2
-    "@sapphire/plugin-subcommands": ^2.1.3
-    "@sapphire/time-utilities": ^1.5.1
-    "@sapphire/type": ^2.1.2
-    "@sapphire/utilities": ^3.2.0
-    "@types/node": 17.0.9
-    colorette: ^2.0.16
-    discord.js: ^13.6.0
-    dotenv-cra: ^3.0.2
-    eslint: 8.7.0
-    npm-run-all: 4.1.5
-    prisma: ^3.8.1
-    reflect-metadata: ^0.1.13
-    tslib: 2.3.1
-    typescript: 4.5.4
-  languageName: unknown
-  linkType: soft
-
 "text-table@npm:^0.2.0":
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
@@ -3010,6 +3028,13 @@ __metadata:
     has-symbols: ^1.0.2
     which-boxed-primitive: ^1.0.2
   checksum: 89d950e18fb45672bc6b3c961f1e72c07beb9640c7ceed847b571ba6f7d2af570ae1a2584cfee268b9d9ea1e3293f7e33e0bc29eaeb9f8e8a0bab057ff9e6bba
+  languageName: node
+  linkType: hard
+
+"undici@npm:^4.11.3":
+  version: 4.12.2
+  resolution: "undici@npm:4.12.2"
+  checksum: e53e144e96afdd097e3289f92ec9baad856dbe162cbb9c0e50b9105244cc7c0867cad3ef444274c78700b3ffc0a96603b26516f59a709008f8dd93eb1482567f
   languageName: node
   linkType: hard
 

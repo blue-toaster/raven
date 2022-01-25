@@ -11,7 +11,7 @@ import { Message, MessageEmbed, Snowflake } from 'discord.js'
   aliases: ['h'],
   preconditions: ['GuildTextOnly']
 })
-export class Ping extends Command {
+export class Help extends Command {
   public async messageRun(message: Message) {
     return await this.helpMenu(message)
   }

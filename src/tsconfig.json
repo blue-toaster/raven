@@ -9,7 +9,8 @@
     "rootDir": ".",
     "paths": {
       "#lib/*": ["./lib/*"],
-      "#lib/env": ["./lib/env/parser.ts"]
+      "#lib/env": ["./lib/env/parser.ts"],
+      "#types": ["./lib/@types/index.ts"]
     },
     "importHelpers": true
   },

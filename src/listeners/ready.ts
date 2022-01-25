@@ -14,8 +14,8 @@ export default class UserEvent extends Listener {
   public run() {
     this.printBanner()
     this.printStoreDebugInformation()
-    this.container.client.guilds.cache.map(guild => {
-      void guild.members.fetch()
+    this.container.client.guilds.cache.map(async guild => {
+      await guild.members.fetch()
     })
   }
 

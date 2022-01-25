@@ -6,7 +6,7 @@ const client = new Client({
   defaultPrefix: envParseString('PREFIX'),
   caseInsensitivePrefixes: true,
   caseInsensitiveCommands: true,
-  intents: ['GUILDS', 'GUILD_MESSAGES'],
+  intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS'],
   logger: {
     level: process.env.NODE_ENV === 'production' ? LogLevel.Info : LogLevel.Debug
   },

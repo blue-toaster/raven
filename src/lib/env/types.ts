@@ -17,4 +17,5 @@ export interface Env {
   DISCORD_TOKEN: string
   PREFIX: string
   OWNERS: string
+  TRN_API_KEY: string
 }
