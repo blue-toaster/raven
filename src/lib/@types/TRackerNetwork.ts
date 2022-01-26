@@ -35,11 +35,11 @@ interface Segment {
 }
 
 type Statistics = 'timePlayed' | 'score' | 'kills' | 'deaths'
-  | 'kd' | 'damage' | 'headshots' | 'dominations'
-  | 'shotsFired' | 'shotsHit' | 'shotsAccuracy'
-  | 'snipersKilled' | 'bombsPlanted' | 'bombsDefused'
-  | 'wins' | 'losses' | 'roundsWon' | 'headshotPct' | 'roundsPlayed'
-  | 'matchesPlayed'
+| 'kd' | 'damage' | 'headshots' | 'dominations'
+| 'shotsFired' | 'shotsHit' | 'shotsAccuracy'
+| 'snipersKilled' | 'bombsPlanted' | 'bombsDefused'
+| 'wins' | 'losses' | 'roundsWon' | 'headshotPct' | 'roundsPlayed'
+| 'matchesPlayed'
 
 interface PurpleMetadata {
   name: string
