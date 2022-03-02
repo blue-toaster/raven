@@ -1,10 +1,10 @@
-import { envParseArray } from '#lib/env'
 import Command from '#lib/structures/Command'
+import { isOwner } from '#util'
 import { ApplyOptions } from '@sapphire/decorators'
 import { PaginatedMessage } from '@sapphire/discord.js-utilities'
 import type { Args, CommandOptions } from '@sapphire/framework'
 import { send } from '@sapphire/plugin-editable-commands'
-import { EmbedField, Message, MessageEmbed, Snowflake } from 'discord.js'
+import { EmbedField, Message, MessageEmbed } from 'discord.js'
 
 @ApplyOptions<CommandOptions>({
   description: 'Shows the available commands.',
@@ -62,7 +62,7 @@ export class Help extends Command {
 
     for (const category of categories) {
       const commands = this.container.stores.get('commands').filter((command) => category === 'Owner'
-        ? this.isOwner(message.author.id)
+        ? isOwner(message.author.id)
         : command.category === category).map(c => `\`${c.name}\``)
 
       if (commands.length !== 0) {
@@ -76,11 +76,5 @@ export class Help extends Command {
 
     await paginatedMessage.run(message, message.author)
     return message
-  }
-
-  private isOwner(id: Snowflake) {
-    const owners = envParseArray('OWNERS')
-
-    return owners.includes(id)
   }
 }
