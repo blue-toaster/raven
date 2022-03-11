@@ -8,7 +8,7 @@ import { send } from '@sapphire/plugin-editable-commands'
 import { Message, MessageEmbed } from 'discord.js'
 
 @ApplyOptions<CommandOptions>({
-  description: 'Returns bot latency'
+  description: 'Get information on a CSGO players info (Steam)'
 })
 export class CSGO extends Command {
   public async messageRun(message: Message, args: Args) {
