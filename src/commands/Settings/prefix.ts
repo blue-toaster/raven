@@ -4,19 +4,22 @@ import { ApplyOptions } from '@sapphire/decorators'
 import type { Args } from '@sapphire/framework'
 import { send } from '@sapphire/plugin-editable-commands'
 import type { SubCommandPluginCommandOptions } from '@sapphire/plugin-subcommands'
-import type { Message } from 'discord.js'
+import type { Message, Snowflake } from 'discord.js'
 
 @ApplyOptions<SubCommandPluginCommandOptions>({
   description: 'Set guild prefix',
   subCommands: ['set', 'reset', { input: 'show', default: true }]
 })
 export class Prefix extends Command {
-  public async show(message: Message) {
-    const settings = await this.container.client.prisma.guildSettings.findUnique({
+  private async settings(guildId: Snowflake) {
+    return await this.container.client.prisma.guildSettings.findUnique({
       where: {
-        guildId: message.guild!.id
+        guildId
       }
     })
+  }
+  public async show(message: Message) {
+    const settings = await this.settings(message.guild!.id)
 
     return await send(message, `Current guild prefix is: ${settings?.prefix ?? envParseString('PREFIX')}`)
   }
@@ -25,6 +28,7 @@ export class Prefix extends Command {
     const prefix = (await args.pickResult('string')).value
 
     if (!prefix) return await send(message, 'You must provide a prefix!')
+    if (prefix.length > 4) return await send(message, 'The new prefix cannot be more than 4 letters long!')
 
     await this.container.client.prisma.guildSettings.update({
       where: {
