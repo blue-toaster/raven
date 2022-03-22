@@ -52,6 +52,6 @@
     "#lib/env": "./build/lib/env/index.js",
     "#types": "./build/lib/@types/index.js",
     "#util": "./build/lib/util/index.js",
-    "#util/*": "./build/lib/util/*"
+    "#util/*": "./build/lib/util/*.js"
   }
 }

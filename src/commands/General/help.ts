@@ -62,7 +62,7 @@ export class Help extends Command {
 
     for (const category of categories) {
       const commands = this.container.stores.get('commands').filter((command) => category === 'Owner'
-        ? isOwner(message.author.id)
+        ? isOwner(message.author.id) && command.category === 'Owner'
         : command.category === category).map(c => `\`${c.name}\``)
 
       if (commands.length !== 0) {
