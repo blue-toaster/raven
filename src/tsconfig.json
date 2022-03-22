@@ -11,7 +11,8 @@
       "#lib/*": ["./lib/*"],
       "#lib/env": ["./lib/env/parser.ts"],
       "#types": ["./lib/@types/index.ts"],
-      "#util": ["./lib/util/index.ts"]
+      "#util": ["./lib/util/index.ts"],
+      "#util/*": ["./lib/util/*"]
     },
     "importHelpers": true
   },

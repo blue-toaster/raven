@@ -1,5 +1,6 @@
 process.env.NODE_ENV ??= 'development'
 
+import { srcDir } from '#util/constants'
 import '@sapphire/plugin-editable-commands/register'
 import '@sapphire/plugin-hmr/register'
 import '@sapphire/plugin-logger/register'
@@ -8,7 +9,6 @@ import { config } from 'dotenv-cra'
 import { join } from 'path'
 import 'reflect-metadata'
 import { inspect } from 'util'
-import { srcDir } from './Constants'
 
 config({ path: join(srcDir, '.env') })
 
