@@ -1,16 +1,15 @@
-import Command from '#lib/structures/Command'
+import { RavenCommand } from '#lib/structures/Command'
 import { ApplyOptions } from '@sapphire/decorators'
-import type { Args, CommandOptions } from '@sapphire/framework'
 import { send } from '@sapphire/plugin-editable-commands'
 import { DurationFormatter } from '@sapphire/time-utilities'
 import type { Message } from 'discord.js'
 
-@ApplyOptions<CommandOptions>({
+@ApplyOptions<RavenCommand.Options>({
   description: 'Set a reminder for yourself',
   aliases: ['remindme']
 })
-export class Ping extends Command {
-  public async messageRun(message: Message, args: Args) {
+export class Reminder extends RavenCommand {
+  public async messageRun(message: Message, args: RavenCommand.Args) {
     const time = await args.pickResult('time')
     const reminder = await args.restResult('string')
 

@@ -1,18 +1,17 @@
-import Command from '#lib/structures/Command'
+import { RavenCommand } from '#lib/structures/Command'
 import { isOwner } from '#util'
 import { ApplyOptions } from '@sapphire/decorators'
 import { PaginatedMessage } from '@sapphire/discord.js-utilities'
-import type { Args, CommandOptions } from '@sapphire/framework'
 import { send } from '@sapphire/plugin-editable-commands'
 import { EmbedField, Message, MessageEmbed } from 'discord.js'
 
-@ApplyOptions<CommandOptions>({
+@ApplyOptions<RavenCommand.Options>({
   description: 'Shows the available commands.',
   aliases: ['h'],
   preconditions: ['GuildTextOnly']
 })
-export class Help extends Command {
-  public async messageRun(message: Message, args: Args) {
+export class Help extends RavenCommand {
+  public async messageRun(message: Message, args: RavenCommand.Args) {
     const command = await args.pickResult('string')
     if (command.success) return await this.commandHelp(message, command.value)
     return await this.helpMenu(message)

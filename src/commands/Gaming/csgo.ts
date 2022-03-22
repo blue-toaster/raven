@@ -1,17 +1,16 @@
 import { envParseString } from '#lib/env'
-import Command from '#lib/structures/Command'
+import { RavenCommand } from '#lib/structures/Command'
 import type { Csgo } from '#types'
 import { request } from '@artiefuzzz/lynx'
 import { ApplyOptions } from '@sapphire/decorators'
-import type { Args, CommandOptions } from '@sapphire/framework'
 import { send } from '@sapphire/plugin-editable-commands'
 import { Message, MessageEmbed } from 'discord.js'
 
-@ApplyOptions<CommandOptions>({
+@ApplyOptions<RavenCommand.Options>({
   description: 'Get information on a CSGO players info (Steam)'
 })
-export class CSGO extends Command {
-  public async messageRun(message: Message, args: Args) {
+export class CSGO extends RavenCommand {
+  public async messageRun(message: Message, args: RavenCommand.Args) {
     const user = (await args.pickResult('string')).value
 
     if (!user) {

@@ -1,8 +1,8 @@
 import type { Args as CommandArgs, CommandOptions } from '@sapphire/framework'
 import type { GuildMember } from 'discord.js'
-import Command from './Command'
+import { RavenCommand } from './Command'
 
-export abstract class ModerationCommand extends Command {
+export abstract class ModerationCommand extends RavenCommand {
   protected async sendDM(target: GuildMember, content: string) {
     const dm = await target.createDM()
 

@@ -1,13 +1,12 @@
-import Command from '#lib/structures/Command'
+import { RavenCommand } from '#lib/structures/Command'
 import { ApplyOptions } from '@sapphire/decorators'
-import type { Args, CommandOptions } from '@sapphire/framework'
 import { send } from '@sapphire/plugin-editable-commands'
 import { Type } from '@sapphire/type'
 import { codeBlock, isThenable } from '@sapphire/utilities'
 import type { Message } from 'discord.js'
 import { inspect } from 'util'
 
-@ApplyOptions<CommandOptions>({
+@ApplyOptions<RavenCommand.Options>({
   aliases: ['ev'],
   description: 'Evals any JavaScript code',
   quotes: [],
@@ -15,8 +14,8 @@ import { inspect } from 'util'
   flags: ['async', 'hidden', 'showHidden', 'silent', 's'],
   options: ['depth']
 })
-export class Eval extends Command {
-  public async messageRun(message: Message, args: Args) {
+export class Eval extends RavenCommand {
+  public async messageRun(message: Message, args: RavenCommand.Args) {
     const code = await args.rest('string')
 
     const { result, success, type } = await this.eval(message, code, {

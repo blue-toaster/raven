@@ -1,6 +1,6 @@
 {
   "name": "raven",
-  "version": "2.3.0",
+  "version": "2.5.0",
   "packageManager": "yarn@3.2.0",
   "main": "./build/main.js",
   "scripts": {

@@ -1,13 +1,12 @@
-import Command from '#lib/structures/Command'
+import { RavenCommand } from '#lib/structures/Command'
 import { ApplyOptions } from '@sapphire/decorators'
-import type { CommandOptions } from '@sapphire/framework'
 import { send } from '@sapphire/plugin-editable-commands'
 import type { Message } from 'discord.js'
 
-@ApplyOptions<CommandOptions>({
+@ApplyOptions<RavenCommand.Options>({
   description: 'Returns bot latency'
 })
-export class Ping extends Command {
+export class Ping extends RavenCommand {
   public async messageRun(message: Message) {
     const msg = await send(message, 'Ping?')
     const ping = Math.round(this.container.client.ws.ping)
