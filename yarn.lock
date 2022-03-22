@@ -129,6 +129,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@influxdata/influxdb-client@npm:^1.24.0":
+  version: 1.24.0
+  resolution: "@influxdata/influxdb-client@npm:1.24.0"
+  checksum: 3f2eeb46720d7fc7e6490fc052feddef2271fe2f6315875407b899192d94cdb9c20794e88f7d6d7be6f241f91297663116adde3db28c9577f80538137ff2a60d
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -2651,6 +2658,7 @@ __metadata:
     "@artiefuzzz/lynx": ^2.2.5
     "@artiefuzzz/ts": 1.1.2
     "@artiefuzzz/utils": ^1.2.3
+    "@influxdata/influxdb-client": ^1.24.0
     "@prisma/client": ^3.8.1
     "@sapphire/decorators": ^4.0.0
     "@sapphire/discord.js-utilities": ^4.4.0
