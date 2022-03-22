@@ -1,4 +1,5 @@
 import { envParseString } from '#lib/env'
+import { readSettings } from '#lib/util'
 import { ApplyOptions } from '@sapphire/decorators'
 import { Events, Listener, ListenerOptions } from '@sapphire/framework'
 import type { Message } from 'discord.js'
@@ -8,12 +9,8 @@ import type { Message } from 'discord.js'
 })
 export default class mentionPrefix extends Listener {
   public async run(message: Message) {
-    const guildPrefix = await this.container.client.prisma.guildSettings.findUnique({
-      where: {
-        guildId: message.guild!.id
-      }
-    })
+    const guild = await readSettings(message?.guild!.id)
 
-    return message.channel.send(`This Guild's current prefix is: ${guildPrefix?.prefix ?? envParseString('PREFIX')}`)
+    return message.channel.send(`This Guild's current prefix is: ${guild?.prefix ?? envParseString('PREFIX')}`)
   }
 }

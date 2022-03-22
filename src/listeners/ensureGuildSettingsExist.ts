@@ -1,3 +1,4 @@
+import { createSettings, readSettings } from '#lib/util'
 import { ApplyOptions } from '@sapphire/decorators'
 import { Events, Listener, ListenerOptions } from '@sapphire/framework'
 import type { Message } from 'discord.js'
@@ -8,25 +9,17 @@ const cached = new Set<string>()
   event: Events.MessageCreate
 })
 export default class ensureGuildSettingsExist extends Listener {
-  public async run(message: Message): Promise<undefined> {
-    if (cached.has(message.guild!.id)) return undefined
+  public async run(message: Message): Promise<boolean> {
+    if (cached.has(message.guild!.id)) return true
 
-    const guild = await this.container.client.prisma.guildSettings.findUnique({
-      where: {
-        guildId: message.guild!.id
-      }
-    })
+    const guild = await readSettings(message.guild!.id)
 
     if (!guild) {
-      await this.container.client.prisma.guildSettings.create({
-        data: {
-          guildId: message.guild!.id
-        }
-      })
+      await createSettings(message.guild!.id)
     }
 
     cached.add(message.guild!.id)
 
-    return undefined
+    return true
   }
 }
