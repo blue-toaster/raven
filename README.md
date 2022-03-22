@@ -1,6 +1,6 @@
 # Raven
 
-I'll update this when I have the time.
+> Multi-Purpose bot.
 
 ## License
 
