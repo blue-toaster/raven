@@ -32,7 +32,7 @@ export class Help extends Command {
     }
 
     if (command.detailedDescription) {
-      fields.push({ name: 'Detailed Description 📝', value: command.detailedDescription, inline: false })
+      fields.push({ name: 'Detailed Description 📝', value: command.detailedDescription as string, inline: false })
     }
 
     if (command.aliases) {

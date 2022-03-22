@@ -1,5 +1,5 @@
-import { Events } from '#lib/@types'
 import { envParseBoolean } from '#lib/env'
+import { Events } from '#types'
 import { ApplyOptions } from '@sapphire/decorators'
 import type { ListenerOptions } from '@sapphire/framework'
 import { Listener, Store } from '@sapphire/framework'

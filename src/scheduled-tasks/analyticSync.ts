@@ -1,4 +1,4 @@
-import { Events } from '#lib/@types'
+import { Events } from '#types'
 import { ApplyOptions } from '@sapphire/decorators'
 import { ScheduledTask } from '@sapphire/plugin-scheduled-tasks'
 
