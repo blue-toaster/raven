@@ -8,15 +8,20 @@ import { ApplyOptions } from '@sapphire/decorators'
 })
 export default class Sync extends AnalyticsListener {
   public run() {
-    const rawUserCount = this.container.client.guilds.cache.reduce((acc, guild) => acc + (guild.memberCount ?? 0), 0)
+    const guilds = this.container.client.guilds.cache.size
+    const users = this.container.client.guilds.cache.reduce((acc, guild) => acc + (guild.memberCount ?? 0), 0)
 
-    this.writePoints([this.syncUsers(rawUserCount), this.syncMessages()])
+    this.writePoints([this.syncGuilds(guilds), this.syncUsers(users), this.syncMessages()])
 
     return this.container.analytics.writeApi.flush()
   }
 
-  private syncUsers(users: number) {
-    return new Point(Points.Users).tag(Tags.Action, Actions.Sync).intField('value', users)
+  private syncGuilds(n: number) {
+    return new Point(Points.Guilds).tag(Tags.Action, Actions.Sync).intField('value', n)
+  }
+
+  private syncUsers(n: number) {
+    return new Point(Points.Users).tag(Tags.Action, Actions.Sync).intField('value', n)
   }
 
   private syncMessages() {

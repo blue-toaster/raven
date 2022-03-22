@@ -5,7 +5,7 @@ import { Events } from '@sapphire/framework'
 @ApplyOptions<AnalyticsListener.Options>({
   event: Events.MessageCreate
 })
-export default class MessageCreateAnalytic extends AnalyticsListener {
+export default class MessageAnalytics extends AnalyticsListener {
   public run() {
     this.container.analytics.messages++
   }
