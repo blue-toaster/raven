@@ -17,4 +17,9 @@ declare module '@sapphire/framework' {
   interface Preconditions {
     OwnerOnly: never
   }
+
+  interface ArgType {
+    duration: Date
+    time: number
+  }
 }
