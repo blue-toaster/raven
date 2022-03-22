@@ -13,8 +13,6 @@ COPY --chown=node:node package.json .
 COPY --chown=node:node .yarnrc.yml .
 COPY --chown=node:node .yarn/ .yarn/
 
-
-
 ENTRYPOINT [ "dumb-init", "--" ]
 
 FROM base as builder 

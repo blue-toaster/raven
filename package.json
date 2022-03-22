@@ -1,6 +1,6 @@
 {
   "name": "raven",
-  "version": "2.0.0",
+  "version": "2.2.0",
   "packageManager": "yarn@3.2.0",
   "main": "./build/main.js",
   "scripts": {
@@ -26,6 +26,7 @@
   "dependencies": {
     "@artiefuzzz/lynx": "^2.2.5",
     "@artiefuzzz/utils": "^1.2.3",
+    "@influxdata/influxdb-client": "^1.24.0",
     "@prisma/client": "^3.8.1",
     "@sapphire/decorators": "^4.0.0",
     "@sapphire/discord.js-utilities": "^4.4.0",

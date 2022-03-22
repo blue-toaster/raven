@@ -1,5 +1,5 @@
-import Client from '#lib/Client'
 import { envParseString } from '#lib/env'
+import Client from '#lib/Raven'
 import { LogLevel } from '@sapphire/framework'
 import { ScheduledTaskRedisStrategy } from '@sapphire/plugin-scheduled-tasks/register-redis'
 

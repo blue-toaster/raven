@@ -134,3 +134,6 @@ build
 
 # PostgreSQL data
 postgres
+
+# InfluxDB data
+influx-data

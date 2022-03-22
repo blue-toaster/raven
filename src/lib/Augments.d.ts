@@ -13,6 +13,13 @@ declare module 'discord.js' {
   }
 }
 
+declare module '@sapphire/pieces' {
+  interface Container {
+    prisma: PrismaClient
+    analytics?: AnalyiticData | Nullish
+  }
+}
+
 declare module '@sapphire/framework' {
   interface Preconditions {
     OwnerOnly: never
@@ -21,5 +28,11 @@ declare module '@sapphire/framework' {
   interface ArgType {
     duration: Date
     time: number
+  }
+}
+
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv extends Env { }
   }
 }

@@ -1,11 +1,17 @@
 import { PrismaClient } from '@prisma/client'
-import { SapphireClient } from '@sapphire/framework'
-import type { Message } from 'discord.js'
-import { envParseString } from './env'
+import { container, SapphireClient } from '@sapphire/framework'
+import type { ClientOptions, Message } from 'discord.js'
+import { envParseBoolean, envParseString } from './env'
 import './setup'
+import AnalyticData from './structures/AnalyticData'
 
 export default class Client extends SapphireClient {
   public prisma!: PrismaClient
+  constructor(options: ClientOptions) {
+    super(options)
+
+    container.analytics = envParseBoolean('INFLUX_ENABLED') ? new AnalyticData() : null
+  }
 
   public async start(): Promise<this> {
     await this._init()

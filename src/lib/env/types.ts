@@ -18,4 +18,9 @@ export interface Env {
   PREFIX: string
   OWNERS: string
   TRN_API_KEY: string
+  INFLUX_ENABLED: BooleanString
+  INFLUX_ORG: string
+  INFLUX_BUCKET: string
+  INFLUX_URL: string
+  INFLUX_TOKEN: string
 }
