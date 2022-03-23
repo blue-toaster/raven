@@ -1,6 +1,6 @@
 # Raven
 
-> Multi-Purpose bot.
+> Moderation Focused Bot
 
 ## [Third Party Licenses](https://github.com/blue-toaster/raven/blob/main/THIRD_PARTY_LICENSES.md)
 
