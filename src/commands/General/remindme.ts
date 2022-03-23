@@ -6,7 +6,7 @@ import type { Message } from 'discord.js'
 
 @ApplyOptions<RavenCommand.Options>({
   description: 'Set a reminder for yourself',
-  aliases: ['remindme']
+  aliases: ['remind']
 })
 export class Reminder extends RavenCommand {
   public async messageRun(message: Message, args: RavenCommand.Args) {
