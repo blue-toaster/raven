@@ -41,12 +41,16 @@
     "@sapphire/time-utilities": "^1.5.1",
     "@sapphire/type": "^2.1.2",
     "@sapphire/utilities": "^3.2.0",
+    "bufferutil": "^4.0.6",
     "bull": "^4.8.1",
     "colorette": "^2.0.16",
     "discord.js": "^13.6.0",
     "dotenv-cra": "^3.0.2",
+    "erlpack": "^0.1.4",
     "prisma": "^3.8.1",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "utf-8-validate": "^5.0.9",
+    "zlib-sync": "^0.1.7"
   },
   "imports": {
     "#lib/*": "./build/lib/*.js",
