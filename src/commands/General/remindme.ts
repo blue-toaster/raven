@@ -5,7 +5,7 @@ import { DurationFormatter } from '@sapphire/time-utilities'
 import type { Message } from 'discord.js'
 
 @ApplyOptions<RavenCommand.Options>({
-  description: 'Set a reminder for yourself',
+  description: 'Put a reminder for yourself',
   aliases: ['remind']
 })
 export class Reminder extends RavenCommand {

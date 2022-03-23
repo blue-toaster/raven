@@ -23,4 +23,8 @@ export interface Env {
   INFLUX_BUCKET: string
   INFLUX_URL: string
   INFLUX_TOKEN: string
+  REDIS_HOST: string
+  REDIS_PASSWD: string
+  REDIS_PORT: IntegerString
+  REDIS_DB: IntegerString
 }

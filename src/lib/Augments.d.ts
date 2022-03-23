@@ -1,4 +1,5 @@
 import type { PrismaClient } from '@prisma/client'
+import type { Piece } from '@sapphire/framework'
 import { Env } from './env/types'
 
 declare global {
@@ -28,6 +29,7 @@ declare module '@sapphire/framework' {
   interface ArgType {
     duration: Date
     time: number
+    piece: Piece
   }
 }
 

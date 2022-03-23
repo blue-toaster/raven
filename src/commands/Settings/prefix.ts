@@ -7,7 +7,7 @@ import type { SubCommandPluginCommandOptions } from '@sapphire/plugin-subcommand
 import type { Message } from 'discord.js'
 
 @ApplyOptions<SubCommandPluginCommandOptions>({
-  description: 'Set guild prefix',
+  description: 'Configures the guild prefix',
   subCommands: ['set', 'reset', { input: 'show', default: true }]
 })
 export class Prefix extends RavenCommand {

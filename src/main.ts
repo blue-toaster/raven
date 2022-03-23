@@ -1,5 +1,6 @@
-import { envParseString } from '#lib/env'
+import { envParseInteger, envParseString } from '#lib/env'
 import Client from '#lib/Raven'
+import '#lib/setup'
 import { LogLevel } from '@sapphire/framework'
 import { ScheduledTaskRedisStrategy } from '@sapphire/plugin-scheduled-tasks/register-redis'
 
@@ -19,10 +20,10 @@ const client = new Client({
     strategy: new ScheduledTaskRedisStrategy({
       bull: {
         redis: {
-          port: 6379,
-          host: 'redis',
-          password: 'redis',
-          db: 2
+          port: envParseInteger('REDIS_PORT'),
+          host: envParseString('REDIS_HOST'),
+          password: envParseString('REDIS_PASSWD'),
+          db: envParseInteger('REDIS_DB')
         }
       }
     })

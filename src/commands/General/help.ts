@@ -1,9 +1,9 @@
 import { RavenCommand } from '#lib/structures/Command'
-import { isOwner } from '#util'
+import { sendLoadingMessage } from '#util'
 import { ApplyOptions } from '@sapphire/decorators'
 import { PaginatedMessage } from '@sapphire/discord.js-utilities'
 import { send } from '@sapphire/plugin-editable-commands'
-import { EmbedField, Message, MessageEmbed } from 'discord.js'
+import { Collection, EmbedField, Message, MessageEmbed } from 'discord.js'
 
 @ApplyOptions<RavenCommand.Options>({
   description: 'Shows the available commands.',
@@ -40,40 +40,68 @@ export class Help extends RavenCommand {
 
     const embed = new MessageEmbed()
       .setTitle(`Help Page | ${command.name}`)
-      .addFields(fields)
+
+    if (fields) embed.addFields(fields)
 
     return await send(message, { embeds: [embed] })
   }
 
   private async helpMenu(message: Message) {
-    let categories: string[] = []
-
-    this.container.stores.get('commands').map(command => {
-      if (categories.includes(command.category!)) return undefined
-
-      return categories.push(command.category!)
-    })
+    const res = await sendLoadingMessage(message)
 
     const paginatedMessage = new PaginatedMessage({
       template: new MessageEmbed()
+        .setTitle('Help Menu • Raven')
         .setColor('RANDOM')
     })
 
-    for (const category of categories) {
-      const commands = this.container.stores.get('commands').filter((command) => category === 'Owner'
-        ? isOwner(message.author.id) && command.category === 'Owner'
-        : command.category === category).map(c => `\`${c.name}\``)
+    const commandsByCategory = await this.getCommands(message)
 
-      if (commands.length !== 0) {
-        paginatedMessage.addPageEmbed((embed) =>
-          embed
-            .addField(category, commands.join(', '))
-            .setTimestamp()
-        )
-      }
+    for (const [category, commands] of commandsByCategory) {
+      paginatedMessage.addPageEmbed((embed) => {
+        return embed
+          .addField(category, commands.map(this.formatCommand.bind(this)).join('\n'))
+          .setColor('WHITE')
+          .setTimestamp()
+      })
     }
 
-    await paginatedMessage.run(message, message.author)
-    return message
+    await paginatedMessage.run(res, message.author)
+    return res
+  }
+
+  private formatCommand(command: RavenCommand) {
+    return `• ${command.name} • ${command.description}`
+  }
+
+  /**
+   * @license Apache License, Version 2.0
+   * @copyright Skyra Project
+   * 
+   * https://github.com/skyra-project/skyra/blob/e97a42370955f32401cd875515011f57673c5297/src/commands/General/help.ts#L188
+   */
+  private async getCommands(message: Message) {
+    const commands = this.container.stores.get('commands')
+    const filtered = new Collection<string, RavenCommand[]>()
+
+    await Promise.all(commands.map(async (cmd) => {
+      const command = cmd as RavenCommand
+
+      if (!command.enabled) return
+
+      const result = await command.preconditions.run(message, command, { command: null! })
+      if (!result.success) return
+
+      const category = filtered.get(command.fullCategory!.join(' - '))
+      if (category) category.push(command)
+      else filtered.set(command.fullCategory!.join(' - '), [command])
+    }))
+
+    return filtered.sort((_, __, f, s) => {
+      if (f > s) return 1
+      if (s > f) return -1
+
+      return 0
+    })
   }
 }

@@ -7,7 +7,7 @@ import { send } from '@sapphire/plugin-editable-commands'
 import { Message, MessageEmbed } from 'discord.js'
 
 @ApplyOptions<RavenCommand.Options>({
-  description: 'Get information on a CSGO players info (Steam)'
+  description: 'Information about a CS:GO player (Steam only)'
 })
 export class CSGO extends RavenCommand {
   public async messageRun(message: Message, args: RavenCommand.Args) {
