@@ -1,6 +1,6 @@
 import { envParseString } from '#lib/env'
 import { RavenCommand } from '#lib/structures/Command'
-import { readSettings, writeSettings } from '#lib/util'
+import { readSettings, writeSettings } from '#util'
 import { ApplyOptions } from '@sapphire/decorators'
 import { send } from '@sapphire/plugin-editable-commands'
 import type { SubCommandPluginCommandOptions } from '@sapphire/plugin-subcommands'

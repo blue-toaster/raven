@@ -18,10 +18,12 @@ ENTRYPOINT [ "dumb-init", "--" ]
 FROM base as builder 
 
 COPY --chown=node:node src/ src/
+COPY --chown=node:node prisma/ prisma/
 
 ENV NODE_ENV="development"
 
 RUN yarn install --immutable
+RUN yarn prisma generate
 RUN yarn build
 
 FROM base AS runner
@@ -30,14 +32,10 @@ ENV NODE_ENV="production"
 
 COPY --chown=node:node --from=builder /usr/src/app/build build
 COPY --chown=node:node prisma/ prisma/
-# COPY --chown=node:node scripts/ scripts/
 
 RUN yarn install --immutable
 
 RUN chown node:node /usr/src/app/
-
-RUN yarn prisma generate
-# RUN yarn prisma migrate dev --name raven
 
 USER node
 

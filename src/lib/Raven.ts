@@ -41,6 +41,7 @@ export default class Client extends SapphireClient {
     })
 
     this.prisma = prisma
+    container.prisma = prisma
 
     await prisma.$connect()
 

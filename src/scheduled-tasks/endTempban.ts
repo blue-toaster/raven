@@ -8,7 +8,7 @@ import type { Snowflake } from 'discord.js'
     removeOnComplete: true
   }
 })
-export default class endTempban extends ScheduledTask {
+export default class endTempBan extends ScheduledTask {
   public async run({ users, guild }: { users: Snowflake[], guild: Snowflake }) {
     const _guild = await getGuild(guild)
 

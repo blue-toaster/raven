@@ -1,5 +1,5 @@
 import { envParseString } from '#lib/env'
-import { readSettings } from '#lib/util'
+import { readSettings } from '#util'
 import { ApplyOptions } from '@sapphire/decorators'
 import { Events, Listener, ListenerOptions } from '@sapphire/framework'
 import type { Message } from 'discord.js'

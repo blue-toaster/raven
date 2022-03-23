@@ -8,7 +8,7 @@ import { ScheduledTask } from '@sapphire/plugin-scheduled-tasks'
     removeOnComplete: true
   }
 })
-export default class reminder extends ScheduledTask {
+export default class AnalyticsSync extends ScheduledTask {
   public run() {
     return this.container.client.emit(Events.AnalyticSync)
   }

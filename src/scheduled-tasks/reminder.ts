@@ -8,7 +8,7 @@ import type { Guild, Snowflake } from 'discord.js'
     removeOnComplete: true
   }
 })
-export default class reminder extends ScheduledTask {
+export default class Reminder extends ScheduledTask {
   public async run({ reminder, user, guild }: { reminder: string, user: Snowflake, guild: Guild }) {
     const _guild = await getGuild(guild)
 

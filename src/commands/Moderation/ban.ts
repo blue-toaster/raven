@@ -49,6 +49,6 @@ export default class Ban extends ModerationCommand {
       if (soft) void user.guild.members.unban(user, 'Soft ban')
     }
 
-    if (duration) this.container.tasks.create('tempBan', { users: users.map(u => u.id), guild: guild.id }, duration)
+    if (duration) this.container.tasks.create('endTempBan', { users: users.map(u => u.id), guild: guild.id }, duration)
   }
 }
