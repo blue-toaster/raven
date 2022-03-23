@@ -8,7 +8,7 @@ const client = new Client({
   defaultPrefix: envParseString('PREFIX'),
   caseInsensitivePrefixes: true,
   caseInsensitiveCommands: true,
-  intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS'],
+  intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_BANS', 'DIRECT_MESSAGES'],
   logger: {
     level: process.env.NODE_ENV === 'production' ? LogLevel.Info : LogLevel.Debug
   },
@@ -30,4 +30,16 @@ const client = new Client({
   },
 })
 
-void client.start()
+const main = async () => {
+  try {
+    client.logger.info('Starting Raven...')
+    await client.login()
+    client.logger.info('Logged in!')
+  } catch (error) {
+    client.logger.fatal(error)
+    client.destroy()
+    process.exit(1)
+  }
+}
+
+void main()
