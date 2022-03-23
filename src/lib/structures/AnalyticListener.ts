@@ -1,7 +1,8 @@
 /**
  * @license Apache License, Version 2.0
- * @copyright Skyra Project
+ * @copyright Skyra Project, 2019
  *
+ * https://github.com/skyra-project/skyra/blob/main/src/lib/structures/listeners/AnalyticsListener.ts
  */
 
 import { envParseBoolean } from '#lib/env/parser'

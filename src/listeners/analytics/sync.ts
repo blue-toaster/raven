@@ -1,3 +1,9 @@
+/**
+ * @license Apache License, Version 2.0
+ * @copyright Favware, 2022
+ * https://github.com/favware/dragonite/blob/main/src/listeners/analytics/analyticsSync.ts
+ */
+
 import { AnalyticsListener } from '#lib/structures/AnalyticListener'
 import { Actions, Events, Points, Tags } from '#types'
 import { Point } from '@influxdata/influxdb-client'

@@ -76,7 +76,7 @@ export class Help extends RavenCommand {
 
   /**
    * @license Apache License, Version 2.0
-   * @copyright Skyra Project
+   * @copyright Skyra Project, 2019
    * 
    * https://github.com/skyra-project/skyra/blob/e97a42370955f32401cd875515011f57673c5297/src/commands/General/help.ts#L188
    */
