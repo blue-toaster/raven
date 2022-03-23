@@ -33,7 +33,7 @@ const client = new Client({
 const main = async () => {
   try {
     client.logger.info('Starting Raven...')
-    await client.login()
+    await client.start()
     client.logger.info('Logged in!')
   } catch (error) {
     client.logger.fatal(error)
