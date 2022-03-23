@@ -64,7 +64,6 @@ ${line03}${dev ? ` ${pad}${blc('<')}${llc('/')}${blc('>')} ${llc('DEVELOPMENT MO
     if (envParseBoolean('INFLUX_ENABLED')) {
       this.container.client.emit(Events.AnalyticSync)
     }
-
   }
 }
 

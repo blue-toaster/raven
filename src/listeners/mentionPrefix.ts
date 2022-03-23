@@ -9,7 +9,7 @@ import type { Message } from 'discord.js'
 })
 export default class mentionPrefix extends Listener {
   public async run(message: Message) {
-    const guild = await readSettings(message?.guild!.id)
+    const guild = await readSettings(message.guild!.id)
 
     return message.channel.send(`This Guild's current prefix is: ${guild?.prefix ?? envParseString('PREFIX')}`)
   }
