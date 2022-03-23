@@ -2,13 +2,9 @@
 
 > Multi-Purpose bot.
 
-## Third Party Licenses
+## [Third Party Licenses](https://github.com/blue-toaster/raven/blob/main/THIRD_PARTY_LICENSES.md)
 
-[Here](https://github.com/blue-toaster/raven/blob/main/THIRD_PARTY_LICENSES.md)
-
-## Privacy Policy
-
-[Here](https://github.com/blue-toaster/raven/blob/main/.github/PRIVACY_POLICY.md)
+## [Privacy Policy](https://github.com/blue-toaster/raven/blob/main/.github/PRIVACY_POLICY.md)
 
 ## License
 
