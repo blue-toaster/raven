@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'fs/promises'
 import { join } from 'path'
 
-fs.rmSync(join(process.cwd(), 'build'), { recursive: true })
+await fs.rm(join(process.cwd(), 'build'), { recursive: true })
