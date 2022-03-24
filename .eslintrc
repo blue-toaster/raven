@@ -5,6 +5,7 @@
     "extraFileExtensions": [".mjs"]
   },
   "rules": {
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
+    "no-extra-parens": "off"
   }
 }

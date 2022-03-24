@@ -1,4 +1,4 @@
-import type { Args as CommandArgs, CommandOptions } from '@sapphire/framework'
+import type { Args as CommandArgs } from '@sapphire/framework'
 import type { GuildMember } from 'discord.js'
 import { RavenCommand } from './Command'
 
@@ -16,5 +16,5 @@ export abstract class ModerationCommand extends RavenCommand {
 
 export namespace ModerationCommand {
   export type Args = CommandArgs
-  export interface Options extends CommandOptions { }
+  export interface Options extends RavenCommand.Options { }
 }
