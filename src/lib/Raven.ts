@@ -1,13 +1,14 @@
 import { PrismaClient } from '@prisma/client'
-import { container, SapphireClient } from '@sapphire/framework'
+import { container, LogLevel, SapphireClient } from '@sapphire/framework'
+import { ScheduledTaskRedisStrategy } from '@sapphire/plugin-scheduled-tasks/register-redis'
 import type { ClientOptions, Message } from 'discord.js'
-import { envParseBoolean, envParseString } from './env'
+import { envParseBoolean, envParseInteger, envParseString } from './env'
 import AnalyticData from './structures/AnalyticData'
 
 export default class Client extends SapphireClient {
   public prisma!: PrismaClient
-  constructor(options: ClientOptions) {
-    super(options)
+  constructor() {
+    super(parseConfig())
 
     container.analytics = envParseBoolean('INFLUX_ENABLED') ? new AnalyticData() : null
   }
@@ -56,5 +57,33 @@ export default class Client extends SapphireClient {
     })
 
     return guild?.prefix ?? envParseString('PREFIX')
+  }
+}
+
+function parseConfig(): ClientOptions {
+  return {
+    defaultPrefix: envParseString('PREFIX'),
+    caseInsensitivePrefixes: true,
+    caseInsensitiveCommands: true,
+    intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_BANS', 'DIRECT_MESSAGES'],
+    logger: {
+      level: process.env.NODE_ENV === 'production' ? LogLevel.Info : LogLevel.Debug
+    },
+    hmr: {
+      enabled: process.env.NODE_ENV === 'development'
+    },
+    shards: 'auto',
+    tasks: {
+      strategy: new ScheduledTaskRedisStrategy({
+        bull: {
+          redis: {
+            port: envParseInteger('REDIS_PORT'),
+            host: envParseString('REDIS_HOST'),
+            password: envParseString('REDIS_PASSWD'),
+            db: envParseInteger('REDIS_DB')
+          }
+        }
+      })
+    },
   }
 }
