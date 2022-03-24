@@ -23,7 +23,7 @@ export default class Lock extends ModerationCommand {
     if (duration) this.container.tasks.create('channelUnlock', { guild: message.guild?.id, channel: channel.id }, duration)
 
     return await send(message,
-       
+      // eslint-disable-next-line @typescript-eslint/no-base-to-string
       `Locking ${channel.toString()} ${duration ? `For ${new DurationFormatter().format(duration)}` : 'Indefinitely'}`
     )
   }

@@ -19,7 +19,7 @@ export default class Unlock extends ModerationCommand {
     await channel.permissionOverwrites.edit(message.guild!.roles.everyone, { SEND_MESSAGES: true })
 
     return await send(message,
-       
+      // eslint-disable-next-line @typescript-eslint/no-base-to-string
       `Unlocked ${channel.toString()}`
     )
   }
