@@ -1,4 +1,8 @@
-import fs from 'fs/promises'
+import fse from 'fs-extra'
 import { join } from 'path'
 
-await fs.rm(join(process.cwd(), 'build'), { recursive: true })
+if (!fse.existsSync(join(process.cwd(), 'build'))) {
+  process.exit(0)
+}
+
+await fse.rm(join(process.cwd(), 'build'), { recursive: true })
