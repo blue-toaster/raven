@@ -1,10 +1,27 @@
-import { getGuild } from '#util'
+import { getGuild, readSettings } from '#util'
 import { container } from '@sapphire/pieces'
-import type { Guild, GuildMember, GuildResolvable } from 'discord.js'
+import { DurationFormatter } from '@sapphire/time-utilities'
+import { Guild, GuildMember, GuildResolvable, MessageEmbed, WebhookClient } from 'discord.js'
 
-export enum Tasks {
+enum Tasks {
   TemporaryBan = 'endTempban',
   UnlockChannel = 'channelUnlock'
+}
+
+enum ModAction {
+  Ban = 'Ban',
+  TempBan = 'TempBan',
+  SoftBan = 'SoftBan',
+  Kick = 'Kick',
+}
+
+interface LogContext {
+  soft?: boolean
+  temporary?: boolean
+  reason: string
+  moderator: string
+  target: string
+  time?: number
 }
 
 const cache = new WeakMap<Guild, ModerationManger>()
@@ -18,6 +35,7 @@ export default class ModerationManger {
   public get tasks() {
     return container.tasks
   }
+
   public async ban(users: GuildMember[], moderator: string, reason: string, duration: number, soft: boolean, silent: boolean) {
     for (const user of users) {
       if (!user.bannable) return
@@ -29,9 +47,11 @@ export default class ModerationManger {
         )
       }
 
-      void user.ban({ reason: `${moderator} ${ duration ? '[TEMPORARY]' : ''} | ${reason}` })
+      void user.ban({ reason: `${moderator} ${duration ? '[TEMPORARY]' : ''} | ${reason}` })
 
       if (soft) void user.guild.members.unban(user, 'Soft ban')
+
+      await this.logAction(soft ? ModAction.SoftBan : duration ? ModAction.TempBan : ModAction.Ban, { moderator, reason, time: duration, soft, target: user.toString(), temporary: Boolean(duration) })
     }
 
     if (duration) return this.addTask(Tasks.TemporaryBan, { users: users.map(u => u.id), guild: this.guild.id }, duration)
@@ -41,14 +61,40 @@ export default class ModerationManger {
       if (!silent) await this.sendDM(user, `You have been kicked from \`${user.guild.name}\` for: ${reason}`)
 
       void user.kick(`${moderator} | ${reason}`)
+
+      await this.logAction(ModAction.Kick, { moderator, reason, target: user.toString() })
     }
   }
+
+  private async logAction(action: ModAction, context: LogContext) {
+    const settings = await readSettings(this.guild.id)
+
+    if (!settings?.modlog) return null
+    const hook = new WebhookClient({ url: settings.modlog })
+
+    const embed = new MessageEmbed()
+      .setTitle('Moderation Log')
+      .setColor(action === ModAction.Ban ? 'RED' : 'YELLOW')
+      .addField('Type', action, true)
+      .addField('User', context.target, true)
+      .addField('Moderator', context.moderator, true)
+      .addField('Reason', context.reason, true)
+
+    if (action === ModAction.TempBan && context.time) {
+      const formatted = new DurationFormatter().format(context.time)
+      embed.addField('Ends', formatted, true)
+    }
+
+    return await hook.send({ embeds: [embed] })
+  }
+
   private async sendDM(target: GuildMember, content: string) {
     const dm = await target.createDM()
 
     return await dm.send(content)
   }
-  private addTask(task: Tasks, payload: Record<string, unknown>,  duration: number) {
+
+  private addTask(task: Tasks, payload: Record<string, unknown>, duration: number) {
     this.tasks.create(task, payload, duration)
   }
 }

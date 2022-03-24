@@ -11,6 +11,8 @@ generator client {
 model GuildSettings {
   guildId String  @id @map("guild_id")
   prefix  String? @db.Text
+  modlog  String? @db.Text @map("mod_log_url")
+  modlog_channel String? @db.Text @map("mod_log_channel_id")
 
   @@map("guild_settings")
 }
