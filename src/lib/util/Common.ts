@@ -10,12 +10,12 @@ export function isOwner(id: string): boolean {
   return envParseArray('OWNERS').includes(id)
 }
 
-export async function getUser(user: UserResolvable) {
-  return await container.client.users.resolve(user)?.fetch()
+export function getUser(user: UserResolvable) {
+  return container.client.users.resolve(user)
 }
 
-export async function getGuild(guild: GuildResolvable) {
-  return await container.client.guilds.resolve(guild)?.fetch()
+export function getGuild(guild: GuildResolvable) {
+  return container.client.guilds.resolve(guild)
 }
 
 export function seconds(number: number) {

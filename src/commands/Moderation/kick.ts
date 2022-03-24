@@ -1,4 +1,5 @@
 import { ModerationCommand } from '#lib/structures/ModerationCommand'
+import { getModeration } from '#lib/structures/ModerationManager'
 import { ApplyOptions } from '@sapphire/decorators'
 import type { GuildMember, Message } from 'discord.js'
 
@@ -23,18 +24,10 @@ export default class Kick extends ModerationCommand {
       )
     }
 
-    await this.execute(manageable, message.author.tag, reason, silent)
+    await getModeration(message.guild!).kick(manageable, message.author.tag, reason, silent)
 
     return await message.channel.send(
       `Successfully kicked ${users.length > 1 ? `${manageable.length} Users.` : users[0].toString()}`
     )
-  }
-
-  private async execute(users: GuildMember[], moderator: string, reason: string, silent: boolean) {
-    for (const user of users) {
-      if (!silent) await this.sendDM(user, `You have been kicked from \`${user.guild.name}\` for: ${reason}`)
-
-      void user.kick(`${moderator} | ${reason}`)
-    }
   }
 }

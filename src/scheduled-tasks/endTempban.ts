@@ -9,8 +9,8 @@ import type { Snowflake } from 'discord.js'
   }
 })
 export default class endTempBan extends ScheduledTask {
-  public async run({ users, guild }: { users: Snowflake[], guild: Snowflake }) {
-    const _guild = await getGuild(guild)
+  public run({ users, guild }: { users: Snowflake[], guild: Snowflake }) {
+    const _guild = getGuild(guild)
 
     if (!_guild?.me!.permissions.has('BAN_MEMBERS')) return false
 

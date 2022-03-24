@@ -10,19 +10,14 @@ export async function readSettings(guildId: Snowflake) {
   })
 }
 
-export async function createSettings(guildId: Snowflake) {
-  return await container.prisma.guildSettings.create({
-    data: {
-      guildId
-    }
-  })
-}
-
-export async function writeSettings(guildId: Snowflake, data: Prisma.GuildSettingsUpdateInput) {
-  return await container.prisma.guildSettings.update({
+export async function writeSettings(guildId: Snowflake, data: unknown) {
+  return await container.prisma.guildSettings.upsert({
     where: {
       guildId
     },
-    data
+    create: {
+      guildId,
+    },
+    update: data as Prisma.GuildSettingsCreateInput
   })
 }
