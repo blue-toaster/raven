@@ -51,7 +51,7 @@ export default class ModerationManger {
 
       if (soft) void user.guild.members.unban(user, 'Soft ban')
 
-      await this.logAction(soft ? ModAction.SoftBan : duration ? ModAction.TempBan : ModAction.Ban, { moderator, reason, time: duration, soft, target: user.toString(), temporary: Boolean(duration) })
+      void this.logAction(soft ? ModAction.SoftBan : duration ? ModAction.TempBan : ModAction.Ban, { moderator, reason, time: duration, soft, target: user.toString(), temporary: Boolean(duration) })
     }
 
     if (duration) return this.addTask(Tasks.TemporaryBan, { users: users.map(u => u.id), guild: this.guild.id }, duration)
@@ -62,7 +62,7 @@ export default class ModerationManger {
 
       void user.kick(`${moderator} | ${reason}`)
 
-      await this.logAction(ModAction.Kick, { moderator, reason, target: user.toString() })
+      void this.logAction(ModAction.Kick, { moderator, reason, target: user.toString() })
     }
   }
 
