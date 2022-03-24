@@ -1,3 +1,4 @@
+import { readSettings } from '#util'
 import { PrismaClient } from '@prisma/client'
 import { container, LogLevel, SapphireClient } from '@sapphire/framework'
 import { ScheduledTaskRedisStrategy } from '@sapphire/plugin-scheduled-tasks/register-redis'
@@ -50,11 +51,7 @@ export default class Client extends SapphireClient {
   }
 
   public fetchPrefix = async (message: Message) => {
-    const guild = await this.prisma.guildSettings.findUnique({
-      where: {
-        guildId: message.guild!.id
-      }
-    })
+    const guild = await readSettings(message.guild!.id)
 
     return guild?.prefix ?? envParseString('PREFIX')
   }
