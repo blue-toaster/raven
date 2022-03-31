@@ -1,7 +1,7 @@
+import type { ReminderTaskPayload } from '#lib/@types'
 import { getGuild } from '#util'
 import { ApplyOptions } from '@sapphire/decorators'
 import { ScheduledTask } from '@sapphire/plugin-scheduled-tasks'
-import type { Guild, Snowflake } from 'discord.js'
 
 @ApplyOptions<ScheduledTask.Options>({
   bullJobOptions: {
@@ -9,8 +9,8 @@ import type { Guild, Snowflake } from 'discord.js'
   }
 })
 export default class Reminder extends ScheduledTask {
-  public async run({ reminder, user, guild }: { reminder: string, user: Snowflake, guild: Guild }) {
-    const _guild = await getGuild(guild)
+  public async run({ reminder, user, guild }: ReminderTaskPayload) {
+    const _guild = getGuild(guild)
 
     if (!_guild?.members.cache.has(user)) return false
 
