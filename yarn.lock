@@ -36,10 +36,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@artiefuzzz/utils@npm:^1.2.1, @artiefuzzz/utils@npm:^1.2.3":
+"@artiefuzzz/utils@npm:^1.2.1":
   version: 1.2.3
   resolution: "@artiefuzzz/utils@npm:1.2.3"
   checksum: 018b732942d66365e98ae78e743aa468769e4d38337408a14e5b3a865206c2c044e9bd9b4e81982a1c753c4b2751c5b7b9e9c5486a4cc1e3c5d65e6604448fd1
+  languageName: node
+  linkType: hard
+
+"@artiefuzzz/utils@npm:^1.2.4":
+  version: 1.2.4
+  resolution: "@artiefuzzz/utils@npm:1.2.4"
+  checksum: be1c0691093d874486381da3d92177676827c3e35c5cca0aa5c2ba7f05ed5384a57e7dea392fb455ec46a57bd799507a2f40c0ce3118f7415d9a789e38924efa
   languageName: node
   linkType: hard
 
@@ -2720,7 +2727,7 @@ __metadata:
     "@artiefuzzz/eslint-config": 1.2.0
     "@artiefuzzz/lynx": ^2.2.5
     "@artiefuzzz/ts": 1.3.2
-    "@artiefuzzz/utils": ^1.2.3
+    "@artiefuzzz/utils": ^1.2.4
     "@influxdata/influxdb-client": ^1.24.0
     "@prisma/client": ^3.8.1
     "@sapphire/decorators": ^4.0.0
