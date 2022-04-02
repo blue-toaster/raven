@@ -2,6 +2,7 @@ version: '3.1'
 
 services:
   raven:
+    image: artiefuzzz/raven    
     tty: true
     restart: always
     build: .
