@@ -1,12 +1,10 @@
 import { envParseBoolean } from '#lib/env'
 import { Events } from '#types'
+import { getPkg } from '#util'
 import { ApplyOptions } from '@sapphire/decorators'
 import type { ListenerOptions } from '@sapphire/framework'
 import { Listener, Store } from '@sapphire/framework'
 import { blue, gray, green, magenta, magentaBright, white, yellow } from 'colorette'
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const pkg: PackageJson = require('../../package.json')
 
 const dev = process.env.NODE_ENV !== 'production'
 
@@ -40,7 +38,7 @@ export default class UserEvent extends Listener {
 
     console.log(
       String.raw`
-${line01} ${pad}${blc(pkg.version)}
+${line01} ${pad}${blc(getPkg().version)}
 ${line02} ${pad}[${success}] Gateway
 ${line03}${dev ? ` ${pad}${blc('<')}${llc('/')}${blc('>')} ${llc('DEVELOPMENT MODE')}` : ''}
 		`.trim()
@@ -65,38 +63,4 @@ ${line03}${dev ? ` ${pad}${blc('<')}${llc('/')}${blc('>')} ${llc('DEVELOPMENT MO
       this.container.client.emit(Events.AnalyticSync)
     }
   }
-}
-
-interface Contributor {
-  name: string
-  email: string
-  url: string
-}
-
-interface PackageJson {
-  name: string
-  version: string
-  description: string
-  main: string
-  scripts: {
-    [name: string]: string
-  }
-  authors: string[]
-  contributors: Contributor[]
-  license: string
-  devDependencies?: {
-    [packageName: string]: string
-  }
-  dependencies?: {
-    [packageName: string]: string
-  }
-  repository?: {
-    type: string
-    url: string
-  }
-  keywords?: string[]
-  bugs?: {
-    url: string
-  }
-  homepage?: string
 }

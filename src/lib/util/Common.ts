@@ -1,10 +1,16 @@
 import { envParseArray } from '#lib/env'
+import type { PackageJson } from '#types'
 import { sleep } from '@artiefuzzz/utils'
 import { container } from '@sapphire/framework'
 import { send } from '@sapphire/plugin-editable-commands'
 import { Time } from '@sapphire/time-utilities'
 import { GuildResolvable, Message, MessageEmbed, MessageOptions, UserResolvable } from 'discord.js'
-import { RandomLoadingMessage } from './constants'
+import { join } from 'path'
+import { mainDir, RandomLoadingMessage } from './constants'
+
+export function getPkg(): PackageJson {
+  return require(join(mainDir, 'package.json'))
+}
 
 export function isOwner(id: string): boolean {
   return envParseArray('OWNERS').includes(id)
