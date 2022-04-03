@@ -24,7 +24,6 @@ COPY --chown=node:node scripts/ scripts/
 ENV NODE_ENV="development"
 
 RUN yarn install --immutable
-RUN yarn prisma generate
 RUN yarn build
 
 RUN rm -r scripts/

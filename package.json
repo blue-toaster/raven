@@ -1,6 +1,6 @@
 {
   "name": "raven",
-  "version": "2.11.1",
+  "version": "2.12.1",
   "author": "ArtieFuzzz#8298",
   "packageManager": "yarn@3.2.0",
   "main": "./build/main.js",
@@ -12,9 +12,9 @@
     "watch": "tsc --watch -p src",
     "start": "prisma migrate deploy; node ./build/main.js",
     "dev": "docker compose up -d influx redis postgres && run-p watch start",
-    "prisma:gen": "prisma generate",
     "migrate:start": "docker compose up -d postgres; prisma migrate dev --name raven",
-    "migrate": "prisma migrate dev --name raven"
+    "migrate": "prisma migrate dev --name raven",
+    "postinstall": "prisma generate"
   },
   "devDependencies": {
     "@artiefuzzz/eslint-config": "1.2.0",
