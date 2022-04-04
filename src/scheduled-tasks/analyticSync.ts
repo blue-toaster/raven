@@ -3,10 +3,7 @@ import { ApplyOptions } from '@sapphire/decorators'
 import { ScheduledTask } from '@sapphire/plugin-scheduled-tasks'
 
 @ApplyOptions<ScheduledTask.Options>({
-  cron: '0 * * * *',
-  bullJobOptions: {
-    removeOnComplete: true
-  }
+  cron: '0 * * * *'
 })
 export default class AnalyticsSync extends ScheduledTask {
   public run() {

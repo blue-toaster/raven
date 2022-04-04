@@ -4,7 +4,7 @@ import { sleep } from '@artiefuzzz/utils'
 import { container } from '@sapphire/framework'
 import { send } from '@sapphire/plugin-editable-commands'
 import { Time } from '@sapphire/time-utilities'
-import { GuildResolvable, Message, MessageEmbed, MessageOptions, UserResolvable } from 'discord.js'
+import { Guild, GuildResolvable, Message, MessageEmbed, MessageOptions, User, UserResolvable } from 'discord.js'
 import { join } from 'path'
 import { mainDir, RandomLoadingMessage } from './constants'
 
@@ -16,11 +16,11 @@ export function isOwner(id: string): boolean {
   return envParseArray('OWNERS').includes(id)
 }
 
-export function getUser(user: UserResolvable) {
+export function getUser(user: UserResolvable): User | null {
   return container.client.users.resolve(user)
 }
 
-export function getGuild(guild: GuildResolvable) {
+export function getGuild(guild: GuildResolvable): Guild | null {
   return container.client.guilds.resolve(guild)
 }
 
@@ -40,6 +40,11 @@ export function years(number: number) {
   return number * Time.Year
 }
 
+/**
+ * Send a temporary message to a channel.
+ * @params message Used to send the channel
+ * @returns Promise<Message | boolean>
+ */
 export async function sendTemporaryMessage(
   message: Message,
   options: string | MessageOptions,
