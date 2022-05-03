@@ -9,7 +9,7 @@ import { join } from 'path'
 import { mainDir, RandomLoadingMessage } from './constants'
 
 export function getPkg(): PackageJson {
-  return require(join(mainDir, 'package.json'))
+  return require(join(mainDir,'..', 'package.json'))
 }
 
 export function isOwner(id: string): boolean {
