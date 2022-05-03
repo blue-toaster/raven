@@ -14,8 +14,8 @@ import type { GuildMember, Message } from 'discord.js'
 export default class Ban extends ModerationCommand {
   public async messageRun(message: Message, args: ModerationCommand.Args) {
     let users: GuildMember[] = await args.repeat('member')
-    const duration = await args.pick('time').catch(() => 0)
     const reason = await args.rest('string').catch(() => 'No reason provided')
+    const duration = await args.pick('time').catch(() => 0)
     const soft = args.getFlags('soft')
     const silent = args.getFlags('silent')
 
