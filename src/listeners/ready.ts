@@ -14,7 +14,7 @@ const dev = process.env.NODE_ENV !== 'production'
 export default class UserEvent extends Listener {
   private readonly style = dev ? yellow : blue
 
-  public run() {
+  public run(): void {
     this.init()
     this.printBanner()
     this.printStoreDebugInformation()
@@ -23,7 +23,7 @@ export default class UserEvent extends Listener {
     })
   }
 
-  private printBanner() {
+  private printBanner(): void {
     const success = green('+')
 
     const llc = dev ? magentaBright : white
@@ -45,7 +45,7 @@ ${line03}${dev ? ` ${pad}${blc('<')}${llc('/')}${blc('>')} ${llc('DEVELOPMENT MO
     )
   }
 
-  private printStoreDebugInformation() {
+  private printStoreDebugInformation(): void {
     const { client, logger } = this.container
     const stores = [...client.stores.values()]
     const last = stores.pop()!
@@ -54,11 +54,11 @@ ${line03}${dev ? ` ${pad}${blc('<')}${llc('/')}${blc('>')} ${llc('DEVELOPMENT MO
     logger.info(this.styleStore(last, true))
   }
 
-  private styleStore(store: Store<any>, last: boolean) {
+  private styleStore(store: Store<any>, last: boolean): string {
     return gray(`${last ? '└─' : '├─'} Loaded ${this.style(store.size.toString().padEnd(3, ' '))} ${store.name}.`)
   }
 
-  private init() {
+  private init(): void {
     if (envParseBoolean('INFLUX_ENABLED')) {
       this.container.client.emit(Events.AnalyticSync)
     }

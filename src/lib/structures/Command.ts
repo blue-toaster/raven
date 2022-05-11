@@ -1,7 +1,6 @@
-import type { Args as CommandArgs, PieceContext } from '@sapphire/framework'
-import { SubCommandPluginCommand } from '@sapphire/plugin-subcommands'
+import { Args as CommandArgs, Command, PieceContext } from '@sapphire/framework'
 
-export abstract class RavenCommand extends SubCommandPluginCommand<CommandArgs, RavenCommand> {
+export abstract class RavenCommand extends Command {
   public usage?: string
   constructor(Context: PieceContext, options: RavenCommandOptions) {
     super(Context, options)
@@ -10,11 +9,12 @@ export abstract class RavenCommand extends SubCommandPluginCommand<CommandArgs, 
   }
 }
 
-export interface RavenCommandOptions extends SubCommandPluginCommand.Options {
+export interface RavenCommandOptions extends Command.Options {
   usage?: string
 }
 
 export namespace RavenCommand {
   export type Args = CommandArgs
   export interface Options extends RavenCommandOptions { }
+  export type ChatInputInteraction = Command.ChatInputInteraction
 }

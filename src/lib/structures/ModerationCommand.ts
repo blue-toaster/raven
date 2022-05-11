@@ -3,7 +3,7 @@ import type { GuildMember } from 'discord.js'
 import { RavenCommand } from './Command'
 
 export abstract class ModerationCommand extends RavenCommand {
-  protected getModeratable(targets: GuildMember[]) {
+  protected getModeratable(targets: GuildMember[]): GuildMember[] {
     return targets.filter(user => user.manageable)
   }
 }

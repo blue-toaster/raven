@@ -1,5 +1,6 @@
 import { getGuild, readSettings } from '#util'
 import { container } from '@sapphire/pieces'
+import type { ScheduledTaskHandler } from '@sapphire/plugin-scheduled-tasks'
 import { DurationFormatter } from '@sapphire/time-utilities'
 import { Guild, GuildMember, GuildResolvable, MessageEmbed, WebhookClient } from 'discord.js'
 
@@ -32,13 +33,14 @@ export default class ModerationManger {
     this.guild = guild
   }
 
-  public get tasks() {
+  public get tasks(): ScheduledTaskHandler {
     return container.tasks
   }
 
-  public async ban(users: GuildMember[], moderator: string, reason: string, duration: number, soft: boolean, silent: boolean) {
+  // @ts-ignore
+  public async ban(users: GuildMember[], moderator: string, reason: string, duration: number, soft: boolean, silent: boolean): Promise<unknown>  {
     for (const user of users) {
-      if (!user.bannable) return
+      if (!user.bannable) return null
 
       if (!silent) {
         await this.sendDM(
@@ -51,12 +53,12 @@ export default class ModerationManger {
 
       if (soft) void user.guild.members.unban(user, 'Soft ban')
 
-      void this.logAction(soft ? ModAction.SoftBan : duration ? ModAction.TempBan : ModAction.Ban, { moderator, reason, time: duration, soft, target: user.toString(), temporary: Boolean(duration) })
+      return void this.logAction(soft ? ModAction.SoftBan : duration ? ModAction.TempBan : ModAction.Ban, { moderator, reason, time: duration, soft, target: user.toString(), temporary: Boolean(duration) })
     }
 
     if (duration) return this.addTask(Tasks.TemporaryBan, { users: users.map(u => u.id), guild: this.guild.id }, duration)
   }
-  public async kick(users: GuildMember[], moderator: string, reason: string, silent: boolean) {
+  public async kick(users: GuildMember[], moderator: string, reason: string, silent: boolean): Promise<void>  {
     for (const user of users) {
       if (!silent) await this.sendDM(user, `You have been kicked from \`${user.guild.name}\` for: ${reason}`)
 
@@ -66,7 +68,7 @@ export default class ModerationManger {
     }
   }
 
-  private async logAction(action: ModAction, context: LogContext) {
+  private async logAction(action: ModAction, context: LogContext): Promise<unknown>  {
     const settings = await readSettings(this.guild.id)
 
     if (!settings?.modlog) return null
@@ -88,13 +90,13 @@ export default class ModerationManger {
     return await hook.send({ embeds: [embed] })
   }
 
-  private async sendDM(target: GuildMember, content: string) {
+  private async sendDM(target: GuildMember, content: string): Promise<unknown> {
     const dm = await target.createDM()
 
     return await dm.send(content)
   }
 
-  private addTask(task: Tasks, payload: Record<string, unknown>, duration: number) {
+  private addTask(task: Tasks, payload: Record<string, unknown>, duration: number): void {
     this.tasks.create(task, payload, duration)
   }
 }

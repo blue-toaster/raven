@@ -24,19 +24,19 @@ export function getGuild(guild: GuildResolvable): Guild | null {
   return container.client.guilds.resolve(guild)
 }
 
-export function seconds(number: number) {
+export function seconds(number: number): number {
   return number * Time.Second
 }
 
-export function minutes(number: number) {
+export function minutes(number: number): number {
   return number * Time.Minute
 }
 
-export function hours(number: number) {
+export function hours(number: number): number {
   return number * Time.Hour
 }
 
-export function years(number: number) {
+export function years(number: number): number {
   return number * Time.Year
 }
 

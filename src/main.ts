@@ -3,7 +3,7 @@ import '#lib/setup'
 
 const client = new Client()
 
-const main = async () => {
+const main = async (): Promise<void> => {
   try {
     client.logger.info('Starting Raven...')
     await client.start()

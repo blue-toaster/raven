@@ -9,7 +9,7 @@ import type { Guild } from 'discord.js'
   event: Events.GuildCreate
 })
 export default class guildCreateAnalytic extends AnalyticsListener {
-  public run(guild: Guild) {
+  public run(guild: Guild): void {
     const guilds = new Point(Points.Guilds)
       .tag(Tags.Action, Actions.Addition)
       .intField('value', guild.client.guilds.cache.size)

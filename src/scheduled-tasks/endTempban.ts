@@ -9,7 +9,7 @@ import { ScheduledTask } from '@sapphire/plugin-scheduled-tasks'
   }
 })
 export default class endTempBan extends ScheduledTask {
-  public run({ users, guild }: TempBanTaskPayload) {
+  public run({ users, guild }: TempBanTaskPayload): boolean {
     const _guild = getGuild(guild)
 
     if (!_guild?.me!.permissions.has('BAN_MEMBERS')) return false

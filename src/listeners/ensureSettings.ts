@@ -9,7 +9,7 @@ const cache: string[] = []
   event: Events.MessageCreate
 })
 export class UserEvent extends Listener {
-  public async run(message: Message) {
+  public async run(message: Message): Promise<boolean> {
     if (cache.includes(message.guild!.id)) return true
 
     const data = await readSettings(message.guild!.id)

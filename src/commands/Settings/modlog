@@ -1,3 +1,6 @@
+/**
+ * I'll rewrite this command later.
+ */
 import { RavenCommand } from '#lib/structures/Command'
 import { readSettings, writeSettings } from '#util'
 import { ApplyOptions } from '@sapphire/decorators'

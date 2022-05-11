@@ -6,7 +6,7 @@ import { ScheduledTask } from '@sapphire/plugin-scheduled-tasks'
   cron: '0 * * * *'
 })
 export default class AnalyticsSync extends ScheduledTask {
-  public run() {
+  public run(): boolean {
     return this.container.client.emit(Events.AnalyticSync)
   }
 }

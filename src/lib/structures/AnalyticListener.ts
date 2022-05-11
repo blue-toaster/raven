@@ -17,29 +17,29 @@ export abstract class AnalyticsListener extends Listener {
     super(context, { ...options, enabled: envParseBoolean('INFLUX_ENABLED') })
   }
 
-  public override onLoad() {
+  public override onLoad(): unknown {
     this.initTags()
     return super.onLoad()
   }
 
-  public writePoint(point: Point) {
+  public writePoint(point: Point): Point {
     return this.container.analytics.writeApi.writePoint(this.injectTags(point))
   }
 
-  public writePoints(points: Point[]) {
+  public writePoints(points: Point[]): Point {
     points = points.map(point => this.injectTags(point))
     return this.container.analytics.writeApi.writePoints(points)
   }
 
-  protected injectTags(point: Point) {
+  protected injectTags(point: Point): Point {
     for (const tag of this.tags) {
       point.tag(tag[0], tag[1])
     }
     return point
   }
 
-  protected initTags() {
-    this.tags.push([Tags.Client, process.env.CLIENT_ID!], [Tags.OriginEvent, this.event])
+  protected initTags(): void {
+    this.tags.push([Tags.Client, process.env.CLIENT_ID!], [Tags.OriginEvent, this.event as string])
   }
 }
 

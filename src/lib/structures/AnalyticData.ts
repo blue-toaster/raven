@@ -8,6 +8,11 @@
 import { envParseBoolean, envParseString } from '#lib/env/parser'
 import { InfluxDB, QueryApi, WriteApi } from '@influxdata/influxdb-client'
 
+interface Config {
+  token: string
+  url: string
+}
+
 export default class AnalyiticData {
   public influx: InfluxDB | null = envParseBoolean('INFLUX_ENABLED') ? new InfluxDB(parseConfig()) : null
 
@@ -24,7 +29,7 @@ export default class AnalyiticData {
   }
 }
 
-function parseConfig() {
+function parseConfig(): Config {
   const url = envParseString('INFLUX_URL')
   const token = envParseString('INFLUX_TOKEN')
 

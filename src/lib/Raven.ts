@@ -21,7 +21,7 @@ export default class Client extends SapphireClient {
     return this
   }
 
-  public stop() {
+  public stop(): void {
     this.logger.warn('Received exit signal. Terminating in 5 seconds...')
     this.destroy()
     setTimeout(() => {
@@ -31,7 +31,7 @@ export default class Client extends SapphireClient {
     }, 5000)
   }
 
-  private async _init() {
+  private async _init(): Promise<void> {
     const prisma = new PrismaClient({
       errorFormat: 'pretty',
       log: [
@@ -50,7 +50,7 @@ export default class Client extends SapphireClient {
     process.once('SIGTERM', () => this.stop())
   }
 
-  public fetchPrefix = async (message: Message) => {
+  public fetchPrefix = async (message: Message): Promise<string> => {
     const guild = await readSettings(message.guild!.id)
 
     return guild?.prefix ?? envParseString('PREFIX')
@@ -59,10 +59,7 @@ export default class Client extends SapphireClient {
 
 function parseConfig(): ClientOptions {
   return {
-    defaultPrefix: envParseString('PREFIX'),
-    caseInsensitivePrefixes: true,
-    caseInsensitiveCommands: true,
-    intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_BANS', 'DIRECT_MESSAGES'],
+    intents: ['GUILDS', 'GUILD_MEMBERS', 'GUILD_BANS'],
     logger: {
       level: process.env.NODE_ENV === 'production' ? LogLevel.Info : LogLevel.Debug
     },

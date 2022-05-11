@@ -10,7 +10,7 @@ import type { TextChannel } from 'discord.js'
   }
 })
 export default class EndChannelLock extends ScheduledTask {
-  public async run({ channel, guild }: ChannelUnlockTaskPayload) {
+  public async run({ channel, guild }: ChannelUnlockTaskPayload): Promise<void> {
     const _guild = getGuild(guild)
     const role = _guild!.roles.everyone
     const _channel: TextChannel = _guild?.channels.cache.get(channel) as TextChannel

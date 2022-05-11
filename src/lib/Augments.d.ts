@@ -1,6 +1,7 @@
 import type { PrismaClient } from '@prisma/client'
 import type { Piece } from '@sapphire/framework'
 import { Env } from './env/types'
+import type Raven from './Raven'
 
 declare global {
   namespace NodeJS {
@@ -8,16 +9,11 @@ declare global {
   }
 }
 
-declare module 'discord.js' {
-  interface Client {
-    prisma: PrismaClient
-  }
-}
-
 declare module '@sapphire/pieces' {
   interface Container {
     prisma: PrismaClient
-    analytics?: AnalyiticData | Nullish
+    analytics: AnalyiticData | Nullish
+    client: Raven
   }
 }
 

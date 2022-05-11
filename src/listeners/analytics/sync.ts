@@ -13,7 +13,7 @@ import { ApplyOptions } from '@sapphire/decorators'
   event: Events.AnalyticSync
 })
 export default class Sync extends AnalyticsListener {
-  public run() {
+  public run(): void {
     const guilds = this.container.client.guilds.cache.size
     const users = this.container.client.guilds.cache.reduce((acc, guild) => acc + (guild.memberCount ?? 0), 0)
 
@@ -22,15 +22,15 @@ export default class Sync extends AnalyticsListener {
     return this.container.analytics.writeApi.flush()
   }
 
-  private syncGuilds(n: number) {
+  private syncGuilds(n: number): Point {
     return new Point(Points.Guilds).tag(Tags.Action, Actions.Sync).intField('value', n)
   }
 
-  private syncUsers(n: number) {
+  private syncUsers(n: number): Point {
     return new Point(Points.Users).tag(Tags.Action, Actions.Sync).intField('value', n)
   }
 
-  private syncMessages() {
+  private syncMessages(): Point {
     const messages = this.container.analytics.messages
     this.container.analytics.messages = 0
 
