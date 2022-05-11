@@ -1,8 +1,8 @@
-import { readSettings } from '#util'
+import { minutes, readSettings } from '#util'
 import { PrismaClient } from '@prisma/client'
 import { container, LogLevel, SapphireClient } from '@sapphire/framework'
 import { ScheduledTaskRedisStrategy } from '@sapphire/plugin-scheduled-tasks/register-redis'
-import type { ClientOptions, Message } from 'discord.js'
+import { ClientOptions, Message, Options } from 'discord.js'
 import { envParseBoolean, envParseInteger, envParseString } from './env'
 import AnalyticData from './structures/AnalyticData'
 
@@ -65,6 +65,13 @@ function parseConfig(): ClientOptions {
     },
     hmr: {
       enabled: process.env.NODE_ENV === 'development'
+    },
+    sweepers: {
+      ...Options.defaultSweeperSettings,
+      messages: {
+        interval: minutes(5),
+        lifetime: minutes(15)
+      } 
     },
     shards: 'auto',
     tasks: {

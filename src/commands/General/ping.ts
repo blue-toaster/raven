@@ -1,6 +1,7 @@
 import { RavenCommand } from '#lib/structures/Command'
 import { ApplyOptions } from '@sapphire/decorators'
 import { isMessageInstance } from '@sapphire/discord.js-utilities'
+import type { Message } from 'discord.js'
 
 @ApplyOptions<RavenCommand.Options>({
   description: 'Returns bot latency',
@@ -9,18 +10,18 @@ import { isMessageInstance } from '@sapphire/discord.js-utilities'
   }
 })
 export class Ping extends RavenCommand {
-  public override async chatInputRun(interaction : RavenCommand.ChatInputInteraction): Promise<void> {
+  public override async chatInputRun(interaction : RavenCommand.ChatInputInteraction): Promise<Message | unknown> {
     const msg = await interaction.reply({ content: 'Pong!', fetchReply: true, ephemeral: true })
 
     if (isMessageInstance(msg)) {
       const ping = Math.round(this.container.client.ws.ping)
-      const apiPing = (msg.createdAt || interaction.createdTimestamp)
+      const apiPing = msg.createdTimestamp - interaction.createdTimestamp
   
       const content = `Pong!\nBot Latency: ${ping}ms\nAPI Latency: ${apiPing}ms`
 
-      return await interaction.reply(content)
+      return await interaction.editReply(content)
     }
 
-    return await interaction.reply('Failed to ping...')
+    return interaction.reply('Failed to ping...')
   }
 }

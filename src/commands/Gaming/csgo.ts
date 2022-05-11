@@ -3,19 +3,30 @@ import { RavenCommand } from '#lib/structures/Command'
 import type { Csgo } from '#types'
 import { request } from '@artiefuzzz/lynx'
 import { ApplyOptions } from '@sapphire/decorators'
-import { send } from '@sapphire/plugin-editable-commands'
+import type { ChatInputCommand } from '@sapphire/framework'
 import { Message, MessageEmbed } from 'discord.js'
 
 @ApplyOptions<RavenCommand.Options>({
-  description: 'Information about a CS:GO player (Steam only)'
+  description: 'Get information about a CS:GO player (Steam only)'
 })
 export class CSGO extends RavenCommand {
-  public async messageRun(message: Message, args: RavenCommand.Args) {
-    const user = (await args.pickResult('string')).value
+  public override registerApplicationCommands(registry: ChatInputCommand.Registry): void {
+    registry.registerChatInputCommand(
+      (builder) =>
+        builder //
+          .setName(this.name)
+          .setDescription(this.description)
+          .addStringOption((option) =>
+            option
+              .setName('username')
+              .setDescription('The name of the ability about which you want to get information.')
+              .setRequired(true)
+          )
+    )
+  }
 
-    if (!user) {
-      return await send(message, 'Please include a username')
-    }
+  public override async chatInputRun(interaction : RavenCommand.ChatInputInteraction): Promise<Message | unknown> {
+    const user = interaction.options.getString('username', true)
 
     const res = await request<Csgo>(`https://public-api.tracker.gg/v2/csgo/standard/profile/steam/${user}`)
       .headers({
@@ -25,7 +36,7 @@ export class CSGO extends RavenCommand {
 
     const json = res.json
 
-    if (json.errors) return await send(message, 'User does not exist!')
+    if (json.errors) return await interaction.reply('That user doesn\'t exist!')
 
     const { data } = json
     const { stats } = data.segments[0]
@@ -50,6 +61,6 @@ export class CSGO extends RavenCommand {
         { name: stats.bombsDefused.displayName, value: stats.bombsDefused.displayValue, inline: true }
       ])
 
-    return await send(message, { embeds: [embed] })
+    return await interaction.reply({ embeds: [embed] })
   }
 }
