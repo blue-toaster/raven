@@ -10,7 +10,7 @@ import type { Message } from 'discord.js'
   }
 })
 export class Ping extends RavenCommand {
-  public override async chatInputRun(interaction : RavenCommand.ChatInputInteraction): Promise<Message | unknown> {
+  public override async chatInputRun(interaction: RavenCommand.ChatInputInteraction): Promise<Message | unknown> {
     const msg = await interaction.reply({ content: 'Pong!', fetchReply: true, ephemeral: true })
 
     if (isMessageInstance(msg)) {

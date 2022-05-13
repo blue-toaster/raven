@@ -25,7 +25,7 @@ export class CSGO extends RavenCommand {
     )
   }
 
-  public override async chatInputRun(interaction : RavenCommand.ChatInputInteraction): Promise<Message | unknown> {
+  public override async chatInputRun(interaction: RavenCommand.ChatInputInteraction): Promise<Message | unknown> {
     const user = interaction.options.getString('username', true)
 
     const res = await request<Csgo>(`https://public-api.tracker.gg/v2/csgo/standard/profile/steam/${user}`)
