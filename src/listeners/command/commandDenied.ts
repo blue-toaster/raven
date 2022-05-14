@@ -7,6 +7,6 @@ export class UserEvent extends Listener<typeof Events.ChatInputCommandDenied> {
     // Use cases for this are for example permissions error when running the `eval` command.
     if (Reflect.get(Object(context), 'silent')) return
 
-    return await interaction.reply({ content, allowedMentions: { users: [interaction.user.id], roles: [] } })
+    return await interaction.reply({ content, allowedMentions: { users: [interaction.user.id], roles: [] }, ephemeral: true })
   }
 }
