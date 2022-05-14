@@ -37,7 +37,7 @@ export default class Purge extends ModerationCommand {
     await (interaction.channel as TextChannel).bulkDelete(messages!)
 
     return await interaction.reply(
-      `Successfully deleted ${limit} messages(s)`
+      { content: `Successfully deleted ${limit} messages(s)`, ephemeral: true }
     )
   }
 }
