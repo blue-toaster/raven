@@ -16,7 +16,7 @@ export default class Ban extends ModerationCommand {
   public override registerApplicationCommands(registry: ChatInputCommand.Registry): void {
     registry.registerChatInputCommand(
       (builder) =>
-        builder //
+        builder
           .setName(this.name)
           .setDescription(this.description)
           .addUserOption((option) => {

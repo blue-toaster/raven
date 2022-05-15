@@ -13,7 +13,7 @@ export class CSGO extends RavenCommand {
   public override registerApplicationCommands(registry: ChatInputCommand.Registry): void {
     registry.registerChatInputCommand(
       (builder) =>
-        builder //
+        builder
           .setName(this.name)
           .setDescription(this.description)
           .addStringOption((option) =>
