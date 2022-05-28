@@ -51,7 +51,7 @@ export default class Kick extends RavenCommand {
 
     if (!manageable) {
       return await interaction.reply(
-        'The specified user cannot be kicked.'
+        { content: 'The specified user cannot be kicked.', ephemeral: true }
       )
     }
 
@@ -59,7 +59,7 @@ export default class Kick extends RavenCommand {
     await getModeration(interaction.guild!).kick(user, interaction.user.tag, reason ?? 'No reason provided', silent)
 
     return await interaction.reply(
-      `Successfully kicked ${user.toString()}`
+      { content: `Successfully kicked ${user.toString()}`, ephemeral: true }
     )
   }
 }

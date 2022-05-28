@@ -59,7 +59,7 @@ export default class Ban extends ModerationCommand {
 
     if (!manageable) {
       return await interaction.reply(
-        'The specified user cannot be banned.'
+        { content: 'The specified user cannot be banned.', ephemeral: true }
       )
     }
 
@@ -67,7 +67,7 @@ export default class Ban extends ModerationCommand {
     await getModeration(interaction.guild!).ban(user, interaction.user.tag, reason ?? 'No reason provided', soft, silent)
 
     return await interaction.reply(
-      `Successfully banned ${user.toString()}`
+      { content: `Successfully banned ${user.toString()}`, ephemeral: true }
     )
   }
 }
