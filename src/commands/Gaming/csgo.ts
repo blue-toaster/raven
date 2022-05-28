@@ -7,10 +7,7 @@ import { ChatInputCommand, RegisterBehavior } from '@sapphire/framework'
 import { Message, MessageEmbed } from 'discord.js'
 
 @ApplyOptions<RavenCommand.Options>({
-  description: 'Get information about a CS:GO player (Steam only)',
-  chatInputCommand: {
-    behaviorWhenNotIdentical: RegisterBehavior.Overwrite
-  }
+  description: 'Get information about a CS:GO player (Steam only)'
 })
 export class CSGO extends RavenCommand {
   public override registerApplicationCommands(registry: ChatInputCommand.Registry): void {
