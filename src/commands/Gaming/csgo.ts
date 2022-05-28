@@ -3,11 +3,14 @@ import { RavenCommand } from '#lib/structures/Command'
 import type { Csgo } from '#types'
 import { request } from '@artiefuzzz/lynx'
 import { ApplyOptions } from '@sapphire/decorators'
-import type { ChatInputCommand } from '@sapphire/framework'
+import { ChatInputCommand, RegisterBehavior } from '@sapphire/framework'
 import { Message, MessageEmbed } from 'discord.js'
 
 @ApplyOptions<RavenCommand.Options>({
-  description: 'Get information about a CS:GO player (Steam only)'
+  description: 'Get information about a CS:GO player (Steam only)',
+  chatInputCommand: {
+    behaviorWhenNotIdentical: RegisterBehavior.Overwrite
+  }
 })
 export class CSGO extends RavenCommand {
   public override registerApplicationCommands(registry: ChatInputCommand.Registry): void {
@@ -21,7 +24,10 @@ export class CSGO extends RavenCommand {
               .setName('username')
               .setDescription('The name of the ability about which you want to get information.')
               .setRequired(true)
-          )
+          ),
+      {
+        behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
+      }
     )
   }
 

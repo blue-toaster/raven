@@ -18,6 +18,6 @@ export default class Reminder extends ScheduledTask {
     const member = await _guild.members.fetch(user)
     const DM = await member.createDM()
 
-    return await DM.send(`I'm here to remind you from ${_guild.name}!\nreminder: ${reminder}`)
+    return await DM.send(`Reminder: ${reminder}`)
   }
 }

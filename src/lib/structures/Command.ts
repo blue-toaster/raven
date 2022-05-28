@@ -1,9 +1,15 @@
-import { Args as CommandArgs, Command, PieceContext } from '@sapphire/framework'
+import { Args as CommandArgs, Command, PieceContext, RegisterBehavior } from '@sapphire/framework'
 
 export abstract class RavenCommand extends Command {
   public usage?: string
   constructor(Context: PieceContext, options: RavenCommandOptions) {
-    super(Context, options)
+    super(Context, {
+      chatInputCommand: {
+        register: true,
+        behaviorWhenNotIdentical: RegisterBehavior.Overwrite
+      },
+      ...options
+    })
 
     this.usage = `${this.name} ${options.usage ?? ''}`
   }

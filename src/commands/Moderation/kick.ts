@@ -1,7 +1,7 @@
 import { RavenCommand } from '#lib/structures/Command'
 import { getModeration } from '#lib/structures/ModerationManager'
 import { ApplyOptions } from '@sapphire/decorators'
-import type { ChatInputCommand } from '@sapphire/framework'
+import { ChatInputCommand, RegisterBehavior } from '@sapphire/framework'
 import type { GuildMember, Message } from 'discord.js'
 
 @ApplyOptions<RavenCommand.Options>({
@@ -35,7 +35,10 @@ export default class Kick extends RavenCommand {
               .setName('silent')
               .setDescription('Should we tell the user that they\'ve been kicked?')
               .setRequired(false)
-          })
+          }),
+      {
+        behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
+      }
     )
   }
   

@@ -1,32 +1,35 @@
 import { RavenCommand } from '#lib/structures/Command'
 import { seconds } from '#util'
 import { ApplyOptions } from '@sapphire/decorators'
-import type { ChatInputCommand } from '@sapphire/framework'
+import { ChatInputCommand, RegisterBehavior } from '@sapphire/framework'
 import { Duration } from '@sapphire/time-utilities'
 import type { Message } from 'discord.js'
 
 @ApplyOptions<RavenCommand.Options>({
   description: 'Set a reminder for later'
 })
-export class Ping extends RavenCommand {
+export class RemindMe extends RavenCommand {
   public override registerApplicationCommands(registry: ChatInputCommand.Registry): void {
     registry.registerChatInputCommand(
       (builder) =>
         builder
           .setName(this.name)
           .setDescription(this.description)
-          .addStringOption((option) => {
-            return option
+          .addStringOption((option) =>
+            option
               .setName('time')
               .setDescription('When should we remind you? (i.e. 1m = 1 minute, 1d = 1 day, etc)')
               .setRequired(true)
-          })
+          )
           .addStringOption((option) =>
             option
               .setName('reminder')
               .setDescription('What are we reminding you?')
               .setRequired(true)
-          )
+          ),
+      {
+        behaviorWhenNotIdentical: RegisterBehavior.Overwrite,
+      }
     )
   }
   
