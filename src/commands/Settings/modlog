@@ -1,6 +1,7 @@
 /**
- * I'll rewrite this command later.
+ * I'll rewrite this when @sapphire/subcommands-plugin gets rewritten
  */
+
 import { RavenCommand } from '#lib/structures/Command'
 import { readSettings, writeSettings } from '#util'
 import { ApplyOptions } from '@sapphire/decorators'
