@@ -6,7 +6,6 @@ import type { Message, TextChannel } from 'discord.js'
 
 @ApplyOptions<ModerationCommand.Options>({
   description: 'Deletes multiple messages at once',
-  flags: ['silent'],
   requiredClientPermissions: ['MANAGE_MESSAGES'],
   requiredUserPermissions: ['MANAGE_MESSAGES'],
   preconditions: ['GuildTextOnly']
