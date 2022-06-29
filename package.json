@@ -51,7 +51,7 @@
     "dotenv-cra": "^3.0.2",
     "erlpack": "^0.1.4",
     "fs-extra": "^10.0.1",
-    "prisma": "^3.8.1",
+    "prisma": "^4.0.0",
     "reflect-metadata": "^0.1.13",
     "utf-8-validate": "^5.0.9",
     "zlib-sync": "^0.1.7"
